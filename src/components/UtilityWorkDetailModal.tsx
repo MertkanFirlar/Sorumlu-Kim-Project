@@ -23,7 +23,11 @@ import {
   AlertCircle,
   MessageSquare,
   Send,
-  Navigation
+  Navigation,
+  Scale,
+  Copy,
+  Check,
+  PhoneCall
 } from 'lucide-react';
 import { PublicUtilityWork, StreetSegment } from '../types';
 import { UTILITY_CATEGORIES_META, SEVERITY_BADGES_META, AUTHORITIES_META } from '../data/mockData';
@@ -57,6 +61,15 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
   const [citizenReportText, setCitizenReportText] = useState('');
   const [reportSubmitted, setReportSubmitted] = useState(false);
   const [reportType, setReportType] = useState('guvenlik_barikati');
+  const [activeInfo, setActiveInfo] = useState<'phone' | 'legal' | null>(null);
+  const [hoveredInfo, setHoveredInfo] = useState<'phone' | 'legal' | null>(null);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+  const handleCopy = (text: string, key: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 2000);
+  };
 
   const handleReportSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -308,35 +321,148 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
           )}
         </div>
 
-        {/* Footer Actions */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-neutral-200">
-          <div className="flex items-center gap-2 text-neutral-600 font-mono text-[11px]">
-            <Phone className="w-3.5 h-3.5 text-[#1D4ED8]" />
-            <span>Resmi İhbar / Arıza:</span>
-            <span className="font-bold text-[#121212]">{work.officialContactPhone}</span>
-          </div>
+        {/* Footer Actions & Quick Info Icons */}
+        <div className="space-y-2 pt-2 border-t border-neutral-200">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            {/* Quick Info Icons */}
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-mono font-bold uppercase text-neutral-400">Hızlı Bilgi:</span>
 
-          <div className="flex items-center gap-2">
-            {matchedStreet && onSelectStreet && (
+              {/* Phone Hotline Icon Button */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setActiveInfo((prev) => (prev === 'phone' ? null : 'phone'))}
+                  onMouseEnter={() => setHoveredInfo('phone')}
+                  onMouseLeave={() => setHoveredInfo(null)}
+                  className={`p-1.5 border flex items-center gap-1 text-xs font-mono transition ${
+                    activeInfo === 'phone'
+                      ? 'bg-[#047857] text-white border-[#047857]'
+                      : 'bg-white text-neutral-700 border-neutral-300 hover:border-[#047857] hover:text-[#047857]'
+                  }`}
+                  title={`📞 İhbar Hattı: ${work.officialContactPhone} - Bilgi için tıklayın`}
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  <span className="text-[10px] font-bold">İhbar Hattı</span>
+                </button>
+
+                {hoveredInfo === 'phone' && !activeInfo && (
+                  <div className="absolute bottom-full left-0 mb-1 z-30 bg-[#121212] text-white text-[10px] font-mono py-1 px-2 shadow-md whitespace-nowrap border border-neutral-700 pointer-events-none">
+                    📞 {work.officialContactPhone} (Tıkla)
+                  </div>
+                )}
+              </div>
+
+              {/* Legal AYKOME Regulation Icon Button */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setActiveInfo((prev) => (prev === 'legal' ? null : 'legal'))}
+                  onMouseEnter={() => setHoveredInfo('legal')}
+                  onMouseLeave={() => setHoveredInfo(null)}
+                  className={`p-1.5 border flex items-center gap-1 text-xs font-mono transition ${
+                    activeInfo === 'legal'
+                      ? 'bg-[#1D4ED8] text-white border-[#1D4ED8]'
+                      : 'bg-white text-neutral-700 border-neutral-300 hover:border-[#1D4ED8] hover:text-[#1D4ED8]'
+                  }`}
+                  title="⚖️ Ruhsat & AYKOME Mevzuatı - Bilgi için tıklayın"
+                >
+                  <Scale className="w-3.5 h-3.5" />
+                  <span className="text-[10px] font-bold">Mevzuat Dayanağı</span>
+                </button>
+
+                {hoveredInfo === 'legal' && !activeInfo && (
+                  <div className="absolute bottom-full left-0 mb-1 z-30 bg-[#121212] text-white text-[10px] font-mono py-1 px-2 shadow-md whitespace-nowrap border border-neutral-700 pointer-events-none">
+                    ⚖️ AYKOME Kazı Ruhsatı ve Güvenlik Yönetmeliği (Tıkla)
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 ml-auto">
+              {matchedStreet && onSelectStreet && (
+                <button
+                  onClick={() => {
+                    onSelectStreet(matchedStreet.id);
+                    onClose();
+                  }}
+                  className="bg-[#1D4ED8] hover:bg-blue-700 text-white px-3 py-1.5 text-xs font-bold font-mono uppercase tracking-tight flex items-center gap-1.5 shadow-xs"
+                >
+                  <Navigation className="w-3.5 h-3.5 text-white" />
+                  <span>Haritada İncele</span>
+                </button>
+              )}
+
               <button
-                onClick={() => {
-                  onSelectStreet(matchedStreet.id);
-                  onClose();
-                }}
-                className="bg-[#1D4ED8] hover:bg-blue-700 text-white px-3 py-1.5 text-xs font-bold font-mono uppercase tracking-tight flex items-center gap-1.5 shadow-xs"
+                onClick={onClose}
+                className="bg-neutral-100 hover:bg-neutral-200 text-neutral-800 px-3 py-1.5 text-xs font-semibold border border-neutral-300"
               >
-                <Navigation className="w-3.5 h-3.5 text-white" />
-                <span>Haritada Caddeyi İncele</span>
+                Kapat
               </button>
-            )}
-
-            <button
-              onClick={onClose}
-              className="bg-neutral-100 hover:bg-neutral-200 text-neutral-800 px-3 py-1.5 text-xs font-semibold border border-neutral-300"
-            >
-              Kapat
-            </button>
+            </div>
           </div>
+
+          {/* Interactive Popover Box (When clicked or hovered) */}
+          {(activeInfo || hoveredInfo) && (
+            <div className="bg-[#F8F9FA] border border-neutral-300 p-2.5 text-xs font-mono relative">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveInfo(null);
+                  setHoveredInfo(null);
+                }}
+                className="absolute top-1.5 right-1.5 text-neutral-400 hover:text-black p-0.5"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+
+              {(activeInfo === 'phone' || (!activeInfo && hoveredInfo === 'phone')) && (
+                <div className="space-y-1 pr-4">
+                  <div className="font-bold text-[#047857] flex items-center gap-1.5 text-[11px]">
+                    <Phone className="w-3.5 h-3.5" /> RESMİ ARIZA VE İHBAR HATTI
+                  </div>
+                  <div className="text-[#121212] font-black text-sm">{work.officialContactPhone}</div>
+                  <div className="flex items-center gap-2 pt-1 font-sans text-[11px]">
+                    <a
+                      href={`tel:${work.officialContactPhone.replace(/\D/g, '') || '153'}`}
+                      className="bg-[#047857] hover:bg-emerald-800 text-white px-2 py-0.5 font-bold font-mono text-[10px] flex items-center gap-1"
+                    >
+                      <PhoneCall className="w-3 h-3 text-white" />
+                      <span>Doğrudan Ara</span>
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => handleCopy(work.officialContactPhone, 'work_phone')}
+                      className="text-neutral-600 hover:text-black flex items-center gap-1 font-mono text-[10px]"
+                    >
+                      {copiedKey === 'work_phone' ? (
+                        <>
+                          <Check className="w-3 h-3 text-emerald-600" />
+                          <span className="text-emerald-600">Kopyalandı</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3" />
+                          <span>Kopyala</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {(activeInfo === 'legal' || (!activeInfo && hoveredInfo === 'legal')) && (
+                <div className="space-y-1 pr-4 font-sans">
+                  <div className="font-bold font-mono text-[#1D4ED8] flex items-center gap-1.5 text-[11px]">
+                    <Scale className="w-3.5 h-3.5" /> RUHSAT VE AYKOME MEVZUAT DAYANAĞI
+                  </div>
+                  <p className="text-neutral-700 text-[11px] leading-relaxed">
+                    Bu kamu altyapı kazısı, 5216 Sayılı Kanun Madde 8 ve AYKOME Altyapı Tesisleri Açım ve Onarım Yönetmeliği uyarınca <strong>{work.permitNumber}</strong> sayılı resmi ruhsat kapsamında yürütülmektedir.
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -576,10 +576,43 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         </div>
         <h4 class="font-bold text-sm text-[#121212] mb-0.5">${street.name}</h4>
         <p class="text-xs text-neutral-600 mb-2">${street.district} / ${street.city}</p>
-        <div class="text-[11px] bg-neutral-100 p-2 border border-neutral-300 font-mono mb-2">
-          <div class="text-neutral-500 font-bold">Yasal Dayanak & Görev:</div>
-          <div class="text-neutral-800">${authorityMeta.legalBasis.substring(0, 60)}...</div>
+        
+        <!-- Micro Info Badges: Legal Basis, Hotline, Department -->
+        <div class="flex items-center gap-1.5 py-1.5 border-y border-neutral-200 my-2">
+          <span class="text-[10px] font-mono text-neutral-400 font-bold">BİLGİ:</span>
+          
+          <button 
+            type="button" 
+            title="⚖️ Yasal Dayanak: ${authorityMeta.legalBasis.replace(/"/g, '&quot;')} (Görmek için tıkla)" 
+            onclick="const p = this.closest('.leaflet-popup-content'); const d = p.querySelector('.popup-dynamic-info'); d.style.display = (d.dataset.type === 'legal' && d.style.display === 'block') ? 'none' : 'block'; d.dataset.type = 'legal'; d.innerHTML = '<strong class=\\'text-[#1D4ED8]\\'>⚖️ Yasal Dayanak:</strong><br/>${authorityMeta.legalBasis.replace(/'/g, "\\'")}'"
+            class="px-1.5 py-0.5 border border-neutral-300 bg-neutral-50 hover:bg-blue-50 hover:border-[#1D4ED8] text-xs font-mono cursor-pointer flex items-center gap-1 transition"
+          >
+            <span>⚖️</span>
+            <span class="text-[9px] font-bold">Dayanak</span>
+          </button>
+
+          <a 
+            href="tel:${authorityMeta.contactPhone.replace(/\D/g, '') || '153'}" 
+            title="📞 İhbar Hattı: ${authorityMeta.contactPhone.replace(/"/g, '&quot;')} (Aramak için tıkla)" 
+            class="px-1.5 py-0.5 border border-neutral-300 bg-neutral-50 hover:bg-emerald-50 hover:border-[#047857] text-xs font-mono cursor-pointer flex items-center gap-1 text-[#047857] transition"
+          >
+            <span>📞</span>
+            <span class="text-[9px] font-bold">${authorityMeta.contactPhone.split(' ')[0]}</span>
+          </a>
+
+          <button 
+            type="button" 
+            title="🏢 Yetkili Birim: ${authorityMeta.departmentName.replace(/"/g, '&quot;')} (Görmek için tıkla)" 
+            onclick="const p = this.closest('.leaflet-popup-content'); const d = p.querySelector('.popup-dynamic-info'); d.style.display = (d.dataset.type === 'dept' && d.style.display === 'block') ? 'none' : 'block'; d.dataset.type = 'dept'; d.innerHTML = '<strong class=\\'text-[#6B21A8]\\'>🏢 Birim:</strong><br/>${authorityMeta.departmentName.replace(/'/g, "\\'")}'"
+            class="px-1.5 py-0.5 border border-neutral-300 bg-neutral-50 hover:bg-purple-50 hover:border-[#6B21A8] text-xs font-mono cursor-pointer flex items-center gap-1 transition"
+          >
+            <span>🏢</span>
+            <span class="text-[9px] font-bold">Birim</span>
+          </button>
         </div>
+
+        <div class="popup-dynamic-info hidden text-[10px] bg-[#F8F9FA] p-2 border border-neutral-300 font-sans mb-2 leading-relaxed"></div>
+
         <div class="text-[10px] text-neutral-500 font-mono flex items-center justify-between border-t border-neutral-200 pt-1">
           <span>Şerit: ${street.laneCount}</span>
           <span>Hız Limiti: ${street.speedLimit} km/s</span>

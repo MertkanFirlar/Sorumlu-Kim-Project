@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { Complaint, PublicUtilityWork, StreetSegment } from '../types';
 import { AUTHORITIES_META, CATEGORY_DETAILS, UTILITY_CATEGORIES_META, SEVERITY_BADGES_META } from '../data/mockData';
+import { AuthorityInfoBadges } from './AuthorityInfoBadges';
 
 interface StreetDetailPanelProps {
   street: StreetSegment;
@@ -221,22 +222,8 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
             </div>
           </div>
 
-          {/* Legal Basis */}
-          <div className="bg-white p-2 border border-neutral-300 text-[11px] text-neutral-700">
-            <div className="flex items-center gap-1 text-neutral-500 font-mono text-[10px] mb-0.5">
-              <Scale className="w-3 h-3 text-neutral-500" />
-              <span>YASAL VE İDARİ DAYANAK:</span>
-            </div>
-            <p className="leading-normal">{meta.legalBasis}</p>
-          </div>
-
-          {/* Contact Direct Phone */}
-          <div className="flex items-center justify-between pt-1 text-[11px] font-mono">
-            <span className="text-neutral-500 flex items-center gap-1">
-              <Phone className="w-3 h-3" /> İletişim / İhbar Hattı:
-            </span>
-            <span className="font-bold text-[#121212]">{meta.contactPhone}</span>
-          </div>
+          {/* Interactive Info Badges: Legal Basis, Contact Hotline, Department, Specs, Verification */}
+          <AuthorityInfoBadges street={street} variant="detailed" />
         </div>
 
         {/* Road Specs Grid */}
