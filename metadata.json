@@ -1,0 +1,6 @@
+{
+  "name": "Sorumlu Kim? - Yol ve Cadde Sorumluluk Haritası",
+  "description": "Türkiye genelinde cadde, sokak ve otoyolların hangi belediye veya devlet kurumuna (Büyükşehir, İlçe, KGM, İl Özel İdare) ait olduğunu tespit eden interaktif harita, şikayet ve resmi dilekçe oluşturucu.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
