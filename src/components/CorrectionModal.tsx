@@ -66,8 +66,8 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-      <div className="bg-white border border-neutral-300 max-w-xl w-full p-5 shadow-2xl text-[#121212] text-xs space-y-4 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-xs sk-fade-in z-50 flex items-center justify-center p-4">
+      <div className="bg-white sk-pop-in rounded-2xl border border-neutral-300 max-w-xl w-full p-5 shadow-2xl text-[#121212] text-xs space-y-4 max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
           <div className="flex items-center gap-2">
@@ -85,7 +85,7 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
         </div>
 
         {/* Current Authority vs Proposed */}
-        <div className="grid grid-cols-2 gap-3 bg-[#F8F9FA] p-3 border border-neutral-300">
+        <div className="grid grid-cols-2 gap-3 bg-[#F8F9FA] p-3 rounded-xl border border-neutral-300">
           <div>
             <div className="text-[10px] text-neutral-500 font-mono uppercase mb-1">Mevcut Kayıtlı Kurum:</div>
             <div className="font-bold text-[#121212] flex items-center gap-1.5">
@@ -100,7 +100,7 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
             <select
               value={proposedAuth}
               onChange={(e) => setProposedAuth(e.target.value as AuthorityType)}
-              className="w-full bg-white border border-neutral-300 px-2 py-1 text-[#121212] font-bold focus:outline-none focus:border-[#121212] font-mono text-xs"
+              className="w-full bg-white rounded-xl border border-neutral-300 px-2 py-1 text-[#121212] font-bold focus:outline-none focus:border-[#121212] font-mono text-xs"
             >
               {(['BUYUKSEHIR', 'ILCE', 'KGM', 'IL_OZEL'] as AuthorityType[]).map((t) => (
                 <option key={t} value={t}>
@@ -123,7 +123,7 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
               value={reason}
               onChange={(e) => setReason(e.target.value)}
               placeholder="Örn: Bu cadde 2024 yılında UKOME kararıyla genişletilmiş ve toplu taşıma ana arteri olarak Büyükşehir yetkisine devredilmiştir..."
-              className="w-full bg-[#F8F9FA] border border-neutral-300 p-2.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs leading-relaxed"
+              className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs leading-relaxed"
             />
           </div>
 
@@ -137,7 +137,7 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
                 value={docUrl}
                 onChange={(e) => setDocUrl(e.target.value)}
                 placeholder="https://belediye.gov.tr/kararlar/..."
-                className="w-full bg-[#F8F9FA] border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-mono"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-mono"
               />
             </div>
             <div>
@@ -149,7 +149,7 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
                 value={submittedBy}
                 onChange={(e) => setSubmittedBy(e.target.value)}
                 placeholder="Örn: Av. Selim K. / Şehir Plancısı"
-                className="w-full bg-[#F8F9FA] border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-medium"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-medium"
               />
             </div>
           </div>
@@ -158,7 +158,7 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1.5 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 font-semibold border border-neutral-300"
+              className="px-3 py-1.5 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 font-semibold rounded-xl border border-neutral-300"
             >
               Kapat
             </button>
@@ -180,7 +180,7 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
             </div>
 
             {streetProposals.map((prop) => (
-              <div key={prop.id} className="bg-[#F8F9FA] p-3 border border-neutral-300 text-xs space-y-1.5 text-[#121212]">
+              <div key={prop.id} className="bg-[#F8F9FA] p-3 rounded-xl border border-neutral-300 text-xs space-y-1.5 text-[#121212]">
                 <div className="flex items-center justify-between">
                   <div className="font-bold text-[#121212] flex items-center gap-1.5">
                     <span className="text-neutral-500">Öneri:</span>

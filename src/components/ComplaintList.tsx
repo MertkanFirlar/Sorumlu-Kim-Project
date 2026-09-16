@@ -101,7 +101,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
   return (
     <div className="max-w-7xl mx-auto p-3 sm:p-5">
       {/* Top Banner and Controls */}
-      <div className="bg-white border border-neutral-300 p-4 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 shadow-xs">
+      <div className="bg-white rounded-xl border border-neutral-300 p-4 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 shadow-xs">
         <div>
           <h1 className="text-lg sm:text-xl font-black text-[#121212] tracking-tight uppercase flex items-center gap-2">
             <MessageSquare className="w-5 h-5 text-[#1D4ED8]" />
@@ -122,7 +122,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white border border-neutral-300 p-3 mb-4 space-y-2.5 text-xs shadow-xs">
+      <div className="bg-white rounded-xl border border-neutral-300 p-3 mb-4 space-y-2.5 text-xs shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
           {/* Search Input */}
           <div className="relative flex-1">
@@ -132,7 +132,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Şikayetler içinde ara (cadde adı, çukur, aydınlatma, ilçe)..."
-              className="w-full bg-[#F8F9FA] border border-neutral-300 pl-8 pr-3 py-1.5 text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white font-medium"
+              className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 pl-8 pr-3 py-1.5 text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white font-medium"
             />
           </div>
 
@@ -144,7 +144,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
               className={`px-2 py-1 text-[11px] font-bold transition ${
                 selectedStatus === 'ALL'
                   ? 'bg-[#121212] text-white'
-                  : 'bg-[#F8F9FA] text-neutral-600 hover:text-black border border-neutral-300'
+                  : 'bg-[#F8F9FA] text-neutral-600 hover:text-black rounded-xl border border-neutral-300'
               }`}
             >
               Tümü
@@ -189,7 +189,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
             className={`px-2.5 py-1 text-[11px] font-medium whitespace-nowrap transition ${
               selectedCategory === 'ALL'
                 ? 'bg-[#121212] text-white font-bold'
-                : 'bg-[#F8F9FA] text-neutral-600 hover:text-black border border-neutral-300'
+                : 'bg-[#F8F9FA] text-neutral-600 hover:text-black rounded-xl border border-neutral-300'
             }`}
           >
             Tüm Kategoriler ({complaints.length})
@@ -218,7 +218,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
       {/* Complaints Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredComplaints.length === 0 ? (
-          <div className="md:col-span-2 bg-white border border-neutral-300 p-12 text-center text-neutral-500 shadow-xs">
+          <div className="md:col-span-2 bg-white rounded-xl border border-neutral-300 p-12 text-center text-neutral-500 shadow-xs">
             <AlertTriangle className="w-8 h-8 text-neutral-400 mx-auto mb-2" />
             <p className="text-sm font-bold text-[#121212]">Seçilen filtrelere uygun şikayet kaydı bulunamadı.</p>
             <button
@@ -240,7 +240,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
             return (
               <div
                 key={comp.id}
-                className="bg-white border border-neutral-300 p-4 shadow-xs flex flex-col justify-between space-y-3 hover:border-neutral-400 transition text-[#121212]"
+                className="bg-white rounded-xl border border-neutral-300 p-4 shadow-xs flex flex-col justify-between space-y-3 hover:border-neutral-400 transition text-[#121212]"
               >
                 {/* Top Card Row */}
                 <div>
@@ -295,7 +295,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
 
                 {/* Official Municipality Response (If exists) */}
                 {comp.officialResponse && (
-                  <div className="bg-[#F8F9FA] border border-neutral-300 p-2.5 text-xs text-[#121212]">
+                  <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2.5 text-xs text-[#121212]">
                     <div className="flex items-center gap-1.5 text-[#1D4ED8] font-bold text-[11px] mb-1">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#1D4ED8]" />
                       <span>Resmi Yanıt ({comp.officialResponse.responder}):</span>
@@ -352,8 +352,8 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
 
       {/* New Complaint Creation Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white border border-neutral-300 max-w-lg w-full p-5 shadow-2xl text-[#121212] text-xs space-y-3.5">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs sk-fade-in z-50 flex items-center justify-center p-4">
+          <div className="bg-white sk-pop-in rounded-2xl border border-neutral-300 max-w-lg w-full p-5 shadow-2xl text-[#121212] text-xs space-y-3.5">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-2.5">
               <h2 className="font-black text-sm text-[#121212] uppercase tracking-tight flex items-center gap-2">
                 <Plus className="w-4 h-4 text-[#1D4ED8]" />
@@ -374,7 +374,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
                 <select
                   value={formStreetId}
                   onChange={(e) => setFormStreetId(e.target.value)}
-                  className="w-full bg-[#F8F9FA] border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white font-mono text-xs"
+                  className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white font-mono text-xs"
                 >
                   {streets.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -390,7 +390,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
                 <select
                   value={formCategory}
                   onChange={(e) => setFormCategory(e.target.value as ComplaintCategory)}
-                  className="w-full bg-[#F8F9FA] border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-medium"
+                  className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-medium"
                 >
                   {(Object.keys(CATEGORY_DETAILS) as ComplaintCategory[]).map((catKey) => (
                     <option key={catKey} value={catKey}>
@@ -409,7 +409,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
                   value={formTitle}
                   onChange={(e) => setFormTitle(e.target.value)}
                   placeholder="Örn: Sağ şerit çukur oluşumu ve aydınlatma yetersizliği"
-                  className="w-full bg-[#F8F9FA] border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-semibold"
+                  className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-semibold"
                 />
               </div>
 
@@ -422,7 +422,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
                   value={formDesc}
                   onChange={(e) => setFormDesc(e.target.value)}
                   placeholder="Sorunun tam olarak hangi noktada olduğunu, trafiği veya yayaları nasıl etkilediğini detaylandırın..."
-                  className="w-full bg-[#F8F9FA] border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs leading-relaxed"
+                  className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs leading-relaxed"
                 />
               </div>
 
@@ -434,7 +434,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
                   value={formAuthor}
                   onChange={(e) => setFormAuthor(e.target.value)}
                   placeholder="Örn: Caner D."
-                  className="w-full bg-[#F8F9FA] border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-medium"
+                  className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white text-xs font-medium"
                 />
               </div>
 
@@ -443,7 +443,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-3 py-1.5 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 font-semibold border border-neutral-300"
+                  className="px-3 py-1.5 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 font-semibold rounded-xl border border-neutral-300"
                 >
                   İptal
                 </button>

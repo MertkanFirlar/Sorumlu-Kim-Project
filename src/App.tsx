@@ -312,7 +312,7 @@ export default function App() {
 
             {/* On-Demand Desktop Sliding/Overlay Side Panel (Opens when a street is clicked) */}
             {selectedStreet && (
-              <div className="hidden lg:block absolute top-3 left-3 z-30 w-96 max-h-[calc(100%-24px)] shadow-2xl border border-neutral-300 overflow-hidden bg-white animate-in slide-in-from-left duration-200">
+              <div className="hidden lg:block absolute top-3 left-3 z-30 w-96 max-h-[calc(100%-24px)] shadow-2xl rounded-2xl border border-neutral-300 overflow-hidden bg-white animate-in slide-in-from-left fade-in duration-300">
                 <StreetDetailPanel
                   street={selectedStreet}
                   onClose={() => setSelectedStreet(null)}
@@ -330,7 +330,11 @@ export default function App() {
 
             {/* On-Demand Mobile/Tablet Bottom Sheet Drawer (Opens when a street is clicked) */}
             {selectedStreet && (
-              <div className="lg:hidden fixed inset-x-0 bottom-0 z-40 max-h-[80vh] overflow-y-auto bg-white border-t border-neutral-300 shadow-2xl animate-in slide-in-from-bottom duration-200">
+              <div className="lg:hidden fixed inset-x-0 bottom-0 z-40 max-h-[80vh] overflow-y-auto bg-white border-t border-neutral-300 shadow-2xl rounded-t-3xl animate-in slide-in-from-bottom duration-300">
+                {/* iOS-style grab handle */}
+                <div className="sticky top-0 z-10 flex justify-center pt-2.5 pb-1 bg-white/95 backdrop-blur">
+                  <span className="w-10 h-1.5 rounded-full bg-neutral-300"></span>
+                </div>
                 <StreetDetailPanel
                   street={selectedStreet}
                   onClose={() => setSelectedStreet(null)}
@@ -417,8 +421,9 @@ export default function App() {
         {currentTab === 'istatistikler' && (
           <div className="flex-1 overflow-y-auto bg-[#F8F9FA]">
             <StatisticsDashboard
-              streets={streets}
+              streets={filteredStreets}
               complaints={complaints}
+              selectedCity={selectedCity}
               onSelectStreetAndOpenMap={handleSelectStreetAndOpenMap}
             />
           </div>

@@ -199,7 +199,7 @@ export const AuthorityInfoBadges: React.FC<AuthorityInfoBadgesProps> = ({
                 <span>YASAL VE İDARİ DAYANAK</span>
               </div>
               
-              <div className="bg-[#F8F9FA] p-2.5 border border-neutral-200 text-[#121212] leading-relaxed font-sans text-xs">
+              <div className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-200 text-[#121212] leading-relaxed font-sans text-xs">
                 <div className="font-semibold text-neutral-800 mb-1">
                   Resmi Kanun Hükmü:
                 </div>
@@ -237,7 +237,7 @@ export const AuthorityInfoBadges: React.FC<AuthorityInfoBadgesProps> = ({
                 <span>İLETİŞİM VE İHBAR HATTI</span>
               </div>
 
-              <div className="bg-[#F8F9FA] p-2.5 border border-neutral-200 space-y-1.5">
+              <div className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-200 space-y-1.5">
                 <div className="text-[11px] text-neutral-500 font-mono">Doğrudan Bildirim Hattı:</div>
                 <div className="text-sm font-black text-[#121212] font-mono">
                   {meta.contactPhone}
@@ -285,7 +285,7 @@ export const AuthorityInfoBadges: React.FC<AuthorityInfoBadgesProps> = ({
                 <span>SORUMLU DAİRE BAŞKANLIĞI & BİRİM</span>
               </div>
 
-              <div className="bg-[#F8F9FA] p-2.5 border border-neutral-200 space-y-1">
+              <div className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-200 space-y-1">
                 <div className="font-bold text-xs text-[#121212]">
                   {street.authorityCustomName || meta.fullNamePrefix}
                 </div>
@@ -308,17 +308,17 @@ export const AuthorityInfoBadges: React.FC<AuthorityInfoBadgesProps> = ({
               </div>
 
               <div className="grid grid-cols-3 gap-1.5 font-mono text-center">
-                <div className="bg-[#F8F9FA] p-1.5 border border-neutral-200">
+                <div className="bg-[#F8F9FA] p-1.5 rounded-xl border border-neutral-200">
                   <div className="text-[9px] text-neutral-500">HIZ LİMİTİ</div>
                   <div className="font-bold text-xs text-[#121212]">{street.speedLimit} km/s</div>
                 </div>
-                <div className="bg-[#F8F9FA] p-1.5 border border-neutral-200">
+                <div className="bg-[#F8F9FA] p-1.5 rounded-xl border border-neutral-200">
                   <div className="text-[9px] text-neutral-500">ŞERİT</div>
                   <div className="font-bold text-xs text-[#121212]">
                     {street.laneCount === 0 ? 'Yaya Alanı' : `${street.laneCount} Şerit`}
                   </div>
                 </div>
-                <div className="bg-[#F8F9FA] p-1.5 border border-neutral-200">
+                <div className="bg-[#F8F9FA] p-1.5 rounded-xl border border-neutral-200">
                   <div className="text-[9px] text-neutral-500">STATÜ</div>
                   <div className="font-bold text-xs text-[#121212]">{street.roadType.toUpperCase()}</div>
                 </div>
@@ -338,7 +338,7 @@ export const AuthorityInfoBadges: React.FC<AuthorityInfoBadgesProps> = ({
                 <span>TOPLULUK VE SİCİL TEYİDİ</span>
               </div>
 
-              <div className="bg-[#F8F9FA] p-2.5 border border-neutral-200 space-y-1.5">
+              <div className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-200 space-y-1.5">
                 <div className="flex items-center justify-between text-[11px] font-mono">
                   <span className="text-neutral-600">Doğruluk Bildirimi:</span>
                   <div className="flex items-center gap-2">

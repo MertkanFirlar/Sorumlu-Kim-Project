@@ -113,11 +113,11 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   const [currentZoom, setCurrentZoom] = useState<number>(12);
   const scanTimeoutRef = useRef<any>(null);
 
-  // Tile layer configs
+  // Tile layer configs — all keyless / no API token required
   const tileUrls = {
-    light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    light: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
     osm: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    dark: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
   };
 
   // Helper to find nearest street segment
@@ -392,7 +392,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           className: 'custom-drag-pin',
           html: `
             <div class="relative flex flex-col items-center -translate-y-6">
-              <div class="bg-[#121212] text-white px-2 py-0.5 text-[10px] font-mono font-bold shadow-md uppercase tracking-wider mb-0.5 whitespace-nowrap border border-neutral-300">
+              <div class="bg-[#121212] text-white px-2 py-0.5 text-[10px] font-mono font-bold shadow-md uppercase tracking-wider mb-0.5 whitespace-nowrap rounded-xl border border-neutral-300">
                 Sorgu Pini (Sürükle)
               </div>
               <div class="w-5 h-5 bg-[#121212] rounded-full border-2 border-white shadow-xl flex items-center justify-center">
@@ -585,7 +585,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             type="button" 
             title="⚖️ Yasal Dayanak: ${authorityMeta.legalBasis.replace(/"/g, '&quot;')} (Görmek için tıkla)" 
             onclick="const p = this.closest('.leaflet-popup-content'); const d = p.querySelector('.popup-dynamic-info'); d.style.display = (d.dataset.type === 'legal' && d.style.display === 'block') ? 'none' : 'block'; d.dataset.type = 'legal'; d.innerHTML = '<strong class=\\'text-[#1D4ED8]\\'>⚖️ Yasal Dayanak:</strong><br/>${authorityMeta.legalBasis.replace(/'/g, "\\'")}'"
-            class="px-1.5 py-0.5 border border-neutral-300 bg-neutral-50 hover:bg-blue-50 hover:border-[#1D4ED8] text-xs font-mono cursor-pointer flex items-center gap-1 transition"
+            class="px-1.5 py-0.5 rounded-xl border border-neutral-300 bg-neutral-50 hover:bg-blue-50 hover:border-[#1D4ED8] text-xs font-mono cursor-pointer flex items-center gap-1 transition"
           >
             <span>⚖️</span>
             <span class="text-[9px] font-bold">Dayanak</span>
@@ -594,7 +594,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           <a 
             href="tel:${authorityMeta.contactPhone.replace(/\D/g, '') || '153'}" 
             title="📞 İhbar Hattı: ${authorityMeta.contactPhone.replace(/"/g, '&quot;')} (Aramak için tıkla)" 
-            class="px-1.5 py-0.5 border border-neutral-300 bg-neutral-50 hover:bg-emerald-50 hover:border-[#047857] text-xs font-mono cursor-pointer flex items-center gap-1 text-[#047857] transition"
+            class="px-1.5 py-0.5 rounded-xl border border-neutral-300 bg-neutral-50 hover:bg-emerald-50 hover:border-[#047857] text-xs font-mono cursor-pointer flex items-center gap-1 text-[#047857] transition"
           >
             <span>📞</span>
             <span class="text-[9px] font-bold">${authorityMeta.contactPhone.split(' ')[0]}</span>
@@ -604,14 +604,14 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             type="button" 
             title="🏢 Yetkili Birim: ${authorityMeta.departmentName.replace(/"/g, '&quot;')} (Görmek için tıkla)" 
             onclick="const p = this.closest('.leaflet-popup-content'); const d = p.querySelector('.popup-dynamic-info'); d.style.display = (d.dataset.type === 'dept' && d.style.display === 'block') ? 'none' : 'block'; d.dataset.type = 'dept'; d.innerHTML = '<strong class=\\'text-[#6B21A8]\\'>🏢 Birim:</strong><br/>${authorityMeta.departmentName.replace(/'/g, "\\'")}'"
-            class="px-1.5 py-0.5 border border-neutral-300 bg-neutral-50 hover:bg-purple-50 hover:border-[#6B21A8] text-xs font-mono cursor-pointer flex items-center gap-1 transition"
+            class="px-1.5 py-0.5 rounded-xl border border-neutral-300 bg-neutral-50 hover:bg-purple-50 hover:border-[#6B21A8] text-xs font-mono cursor-pointer flex items-center gap-1 transition"
           >
             <span>🏢</span>
             <span class="text-[9px] font-bold">Birim</span>
           </button>
         </div>
 
-        <div class="popup-dynamic-info hidden text-[10px] bg-[#F8F9FA] p-2 border border-neutral-300 font-sans mb-2 leading-relaxed"></div>
+        <div class="popup-dynamic-info hidden text-[10px] bg-[#F8F9FA] p-2 rounded-xl border border-neutral-300 font-sans mb-2 leading-relaxed"></div>
 
         <div class="text-[10px] text-neutral-500 font-mono flex items-center justify-between border-t border-neutral-200 pt-1">
           <span>Şerit: ${street.laneCount}</span>
@@ -745,7 +745,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           ${work.streetName} (${work.district} / ${work.city})
         </div>
 
-        <div class="bg-[#F8F9FA] p-2 border border-neutral-300 text-[11px] font-mono space-y-1 mb-2">
+        <div class="bg-[#F8F9FA] p-2 rounded-xl border border-neutral-300 text-[11px] font-mono space-y-1 mb-2">
           <div class="text-[#121212] flex items-center justify-between">
             <span class="text-neutral-500">Çalışma Saatleri:</span>
             <span class="font-bold text-[#C2410C]">${work.standardWorkingHours.scheduleText}</span>
@@ -812,7 +812,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
       {/* Floating Top Left Controls: Compact, Sleek Bar */}
       <div className="absolute top-3 left-3 z-20 flex flex-col gap-2 max-w-[calc(100%-80px)]">
-        <div className="flex flex-wrap items-center gap-1.5 bg-white/95 backdrop-blur-xs p-1.5 border border-neutral-300 shadow-md">
+        <div className="flex flex-wrap items-center gap-1.5 bg-white/95 backdrop-blur-xs p-1.5 rounded-xl border border-neutral-300 shadow-md">
           {/* 81 Provinces Selector */}
           <div className="flex items-center text-xs font-mono">
             <Globe className="w-3.5 h-3.5 text-[#1D4ED8] ml-1.5 mr-1" />
@@ -865,7 +865,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
             {/* On-Demand Layers Popover Card */}
             {isLayersOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-white border border-neutral-300 shadow-2xl p-3 z-50 text-xs font-sans space-y-3 animate-in fade-in zoom-in-95 duration-150">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl border border-neutral-300 shadow-2xl p-3 z-50 text-xs font-sans space-y-3 animate-in fade-in zoom-in-95 duration-150">
                 <div className="flex items-center justify-between pb-1.5 border-b border-neutral-200">
                   <span className="font-black uppercase text-[11px] text-[#121212]">Harita & Katmanlar</span>
                   <button onClick={() => setIsLayersOpen(false)} className="text-neutral-400 hover:text-black">
@@ -913,7 +913,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
                   <select
                     value={roadTypeFilter}
                     onChange={(e) => setRoadTypeFilter(e.target.value as any)}
-                    className="w-full bg-[#F8F9FA] border border-neutral-300 p-1 text-xs font-mono"
+                    className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-1 text-xs font-mono"
                   >
                     <option value="ALL">Tüm Yol Türleri</option>
                     <option value="bulvar">Bulvarlar</option>
@@ -941,7 +941,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
         {/* Selected Road Toast */}
         {nearestStreetNotification && (
-          <div className="bg-white border border-neutral-300 text-[#121212] px-3 py-1.5 text-xs shadow-md flex items-center gap-2 max-w-sm animate-in fade-in">
+          <div className="bg-white rounded-xl border border-neutral-300 text-[#121212] px-3 py-1.5 text-xs shadow-md flex items-center gap-2 max-w-sm animate-in fade-in">
             <MapPin className="w-3.5 h-3.5 text-[#1D4ED8] shrink-0" />
             <div className="flex items-center gap-1.5 truncate">
               <span className="font-bold underline cursor-pointer truncate" onClick={() => onSelectStreet(nearestStreetNotification.street)}>
@@ -966,7 +966,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
       {/* Floating Map Controls (Right Side) */}
       <div className="absolute top-3 right-3 z-20 flex flex-col gap-1 shadow-md">
-        <div className="bg-white border border-neutral-300 overflow-hidden flex flex-col">
+        <div className="bg-white rounded-xl border border-neutral-300 overflow-hidden flex flex-col">
           <button
             onClick={handleZoomIn}
             className="p-2 text-neutral-700 hover:bg-neutral-100 hover:text-black transition border-b border-neutral-200"
@@ -996,7 +996,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         {!isLegendOpen ? (
           <button
             onClick={() => setIsLegendOpen(true)}
-            className="flex items-center gap-2 bg-white/95 hover:bg-white text-[#121212] px-3 py-1.5 border border-neutral-300 shadow-md text-xs font-mono font-bold transition backdrop-blur-xs hover:border-black"
+            className="flex items-center gap-2 bg-white/95 hover:bg-white text-[#121212] px-3 py-1.5 rounded-xl border border-neutral-300 shadow-md text-xs font-mono font-bold transition backdrop-blur-xs hover:border-black"
             title="Sorumluluk Renk Rehberini Aç"
           >
             <div className="flex items-center gap-1">
@@ -1008,7 +1008,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             <span>Renk Rehberi / Lejant</span>
           </button>
         ) : (
-          <div className="bg-white border border-neutral-300 p-3 shadow-2xl text-xs max-w-xs sm:max-w-md space-y-2 animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-white rounded-xl border border-neutral-300 p-3 shadow-2xl text-xs max-w-xs sm:max-w-md space-y-2 animate-in fade-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between pb-1 border-b border-neutral-200 font-mono">
               <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-500">
                 TÜRKİYE YOL SORUMLULUK REJİMİ

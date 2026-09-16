@@ -17,14 +17,19 @@ import { AUTHORITIES_META, CATEGORY_DETAILS } from '../data/mockData';
 interface StatisticsDashboardProps {
   streets: StreetSegment[];
   complaints: Complaint[];
+  selectedCity?: string;
   onSelectStreetAndOpenMap: (streetId: string) => void;
 }
 
 export const StatisticsDashboard: React.FC<StatisticsDashboardProps> = ({
   streets,
   complaints,
+  selectedCity = 'ALL',
   onSelectStreetAndOpenMap,
 }) => {
+  // Regional scope label — reflects the city filter selected in the navbar
+  const isNational = !selectedCity || selectedCity === 'ALL';
+  const regionLabel = isNational ? 'ULUSAL' : selectedCity.toUpperCase();
   // Aggregate Metrics
   const totalStreets = streets.length;
   const totalLengthKm = Math.round(streets.reduce((acc, s) => acc + s.lengthMeters, 0) / 1000);
@@ -95,43 +100,45 @@ export const StatisticsDashboard: React.FC<StatisticsDashboardProps> = ({
   return (
     <div className="max-w-7xl mx-auto p-3 sm:p-5">
       {/* Top Banner */}
-      <div className="bg-white border border-neutral-300 p-4 mb-5 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[#121212]">
+      <div className="bg-white rounded-xl border border-neutral-300 p-4 mb-5 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[#121212]">
         <div>
           <div className="flex items-center gap-2">
             <span className="bg-blue-50 text-[#1D4ED8] text-[10px] font-mono font-bold px-2 py-0.5 border border-blue-200 uppercase">
-              ULUSAL VERİ ANALİTİĞİ VE PERFORMANS RAPORU
+              {regionLabel} VERİ ANALİTİĞİ VE PERFORMANS RAPORU
             </span>
           </div>
           <h1 className="text-lg sm:text-xl font-black text-[#121212] tracking-tight uppercase mt-1">
-            Yol Rejimi & Kurum Çözüm Performans İstatistikleri
+            {isNational ? 'Yol Rejimi & Kurum Çözüm Performans İstatistikleri' : `${regionLabel} Yol Rejimi & Kurum Performansı`}
           </h1>
           <p className="text-xs text-neutral-600 mt-0.5">
-            Büyükşehir, İlçe, Karayolları ve İl Özel İdarelerinin yol ağı payları, şikayet çözme hızları ve bölge yoğunlukları.
+            {isNational
+              ? 'Büyükşehir, İlçe, Karayolları ve İl Özel İdarelerinin yol ağı payları, şikayet çözme hızları ve bölge yoğunlukları.'
+              : `${regionLabel} genelinde yol ağı payları, kurum sorumlulukları ve en çok bildirim alan ilçeler.`}
           </p>
         </div>
       </div>
 
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-5 font-mono">
-        <div className="bg-white border border-neutral-300 p-3.5 shadow-xs">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3.5 shadow-xs">
           <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-wider">KAYITLI YOL AĞI</div>
           <div className="text-xl sm:text-2xl font-black text-[#121212] mt-1">{totalLengthKm} km</div>
           <div className="text-[11px] text-neutral-500 mt-0.5">{totalStreets} Segment / Arter</div>
         </div>
 
-        <div className="bg-white border border-neutral-300 p-3.5 shadow-xs">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3.5 shadow-xs">
           <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-wider">TOPLAM BİLDİRİM</div>
           <div className="text-xl sm:text-2xl font-black text-[#1D4ED8] mt-1">{totalComplaints} Şikayet</div>
           <div className="text-[11px] text-neutral-500 mt-0.5">{pendingComplaints} İşlemde / Beklemede</div>
         </div>
 
-        <div className="bg-white border border-neutral-300 p-3.5 shadow-xs">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3.5 shadow-xs">
           <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-wider">ÇÖZÜM ORANI</div>
           <div className="text-xl sm:text-2xl font-black text-[#047857] mt-1">%{resolutionRate}</div>
           <div className="text-[11px] text-neutral-500 mt-0.5">{resolvedComplaints} Çözüme Ulaşan</div>
         </div>
 
-        <div className="bg-white border border-neutral-300 p-3.5 shadow-xs">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3.5 shadow-xs">
           <div className="text-[10px] text-neutral-500 font-bold uppercase tracking-wider">AKTİF ŞANTİYE / KAZI</div>
           <div className="text-xl sm:text-2xl font-black text-[#C2410C] mt-1">
             {streets.filter((s) => s.status === 'construction').length} Nokta
@@ -144,7 +151,7 @@ export const StatisticsDashboard: React.FC<StatisticsDashboardProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Left 8 Cols: Authority Performance Table & Scorecard */}
         <div className="lg:col-span-8 space-y-4">
-          <div className="bg-white border border-neutral-300 p-4 shadow-xs">
+          <div className="bg-white rounded-xl border border-neutral-300 p-4 shadow-xs">
             <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#121212] border-b border-neutral-200 pb-2 mb-3 flex items-center justify-between">
               <span>KURUM BAZINDA YOL YETKİSİ VE ÇÖZÜM HIZI PERFORMANSI</span>
               <span className="text-[11px] text-neutral-500 font-normal">Son 90 Gün</span>
@@ -201,14 +208,14 @@ export const StatisticsDashboard: React.FC<StatisticsDashboardProps> = ({
           </div>
 
           {/* Top Reported Districts Table */}
-          <div className="bg-white border border-neutral-300 p-4 shadow-xs text-xs">
+          <div className="bg-white rounded-xl border border-neutral-300 p-4 shadow-xs text-xs">
             <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#121212] border-b border-neutral-200 pb-2 mb-3">
               EN ÇOK SORUMLULUK TALEBİ ALAN İLÇELER
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
               {sortedDistricts.slice(0, 6).map(([distName, count]) => (
-                <div key={distName} className="bg-[#F8F9FA] p-2.5 border border-neutral-300">
+                <div key={distName} className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-300">
                   <div className="font-bold text-[#121212] text-xs truncate">{distName}</div>
                   <div className="text-neutral-500 text-[10px] font-mono mt-0.5">
                     {count} Tescilli Yol Arter
@@ -222,7 +229,7 @@ export const StatisticsDashboard: React.FC<StatisticsDashboardProps> = ({
         {/* Right 4 Cols: Category Share & Legal Insights */}
         <div className="lg:col-span-4 space-y-4 text-xs">
           {/* Categories Chart */}
-          <div className="bg-white border border-neutral-300 p-4 shadow-xs space-y-3">
+          <div className="bg-white rounded-xl border border-neutral-300 p-4 shadow-xs space-y-3">
             <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#121212] border-b border-neutral-200 pb-2">
               KATEGORİ DAĞILIMI
             </div>
@@ -252,7 +259,7 @@ export const StatisticsDashboard: React.FC<StatisticsDashboardProps> = ({
           </div>
 
           {/* Legal Reference Memo */}
-          <div className="bg-[#F8F9FA] border border-neutral-300 p-4 shadow-xs space-y-2 text-neutral-700 text-[11px] leading-relaxed">
+          <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-4 shadow-xs space-y-2 text-neutral-700 text-[11px] leading-relaxed">
             <div className="font-bold text-[#121212] flex items-center gap-1.5 text-xs font-mono">
               <ShieldCheck className="w-4 h-4 text-[#1D4ED8]" />
               <span>YOL REJİMİ YASAL ÇERÇEVESİ</span>
