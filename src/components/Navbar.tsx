@@ -75,7 +75,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Brand and Tag */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => onSelectTab('harita')}>
-            <div className="w-9 h-9 bg-[#121212] flex items-center justify-center font-bold text-white shadow-xs">
+            <div className="w-9 h-9 bg-[#121212] rounded-xl flex items-center justify-center font-bold text-white shadow-xs">
               <Building2 className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -83,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="font-black text-base sm:text-lg tracking-tight uppercase text-[#121212]">
                   Sorumlu Kim?
                 </span>
-                <span className="bg-neutral-100 text-neutral-800 text-[10px] font-mono font-bold px-1.5 py-0.5 border border-neutral-300">
+                <span className="bg-neutral-100 text-neutral-800 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-xl border border-neutral-300">
                   T.C. YOL REJİMİ
                 </span>
               </div>
@@ -97,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onUseGps}
             disabled={isGpsLoading}
-            className="md:hidden flex items-center gap-1 bg-white hover:bg-neutral-100 text-[#121212] px-2.5 py-1.5 text-xs font-mono border border-neutral-300"
+            className="md:hidden flex items-center gap-1 bg-white hover:bg-neutral-100 text-[#121212] px-2.5 py-1.5 text-xs font-mono rounded-xl border border-neutral-300"
           >
             <Navigation className={`w-3.5 h-3.5 text-[#1D4ED8] ${isGpsLoading ? 'animate-spin' : ''}`} />
             <span>GPS</span>
@@ -114,8 +114,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
               onBlur={() => setTimeout(() => setIsSearchFocused(false), 250)}
-              placeholder="Cadde, sokak, mahalle veya ilçe ara (Örn: Büyükdere, Moda, Tunalı)..."
-              className="w-full bg-[#F8F9FA] border border-neutral-300 pl-9 pr-8 py-1.5 text-xs text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white font-medium transition"
+              placeholder="Cadde, sokak, mahalle veya ilçe ara..."
+              className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 pl-9 pr-8 py-1.5 text-xs text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white font-medium transition"
             />
             {searchQuery && (
               <button
@@ -129,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Autocomplete Dropdown */}
           {isSearchFocused && searchResults.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-neutral-300 shadow-xl z-50 max-h-72 overflow-y-auto">
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl border border-neutral-300 shadow-xl z-50 max-h-72 overflow-y-auto">
               <div className="p-1.5 text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-200 px-3 bg-[#F8F9FA]">
                 Bulunan Güzergahlar ({searchResults.length})
               </div>
@@ -169,7 +169,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onUseGps}
             disabled={isGpsLoading}
-            className="flex items-center gap-1.5 bg-white hover:bg-neutral-100 text-[#121212] px-3 py-1.5 text-xs font-mono font-semibold border border-neutral-300 transition shadow-xs"
+            className="flex items-center gap-1.5 bg-white hover:bg-neutral-100 text-[#121212] px-3 py-1.5 text-xs font-mono font-semibold rounded-xl border border-neutral-300 transition shadow-xs"
             title="Mevcut konumunuzu tespit ederek en yakın cadde sorumluluğunu gösterir"
           >
             <Navigation className={`w-3.5 h-3.5 text-[#1D4ED8] ${isGpsLoading ? 'animate-spin' : ''}`} />
@@ -280,7 +280,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             value={selectedCity}
             onChange={(e) => onSelectCity(e.target.value)}
             aria-label="Şehir Seçimi"
-            className="bg-white border border-neutral-300 text-[#121212] text-xs px-2 py-1 font-mono font-bold focus:outline-none focus:border-[#121212] max-w-[180px] truncate"
+            className="bg-white rounded-xl border border-neutral-300 text-[#121212] text-xs px-2 py-1 font-mono font-bold focus:outline-none focus:border-[#121212] max-w-[180px] truncate"
           >
             <option value="ALL">🇹🇷 Tüm Türkiye (81 İl)</option>
             {TURKEY_PROVINCES.map((prov) => (
@@ -297,7 +297,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className={`px-2 py-0.5 text-[11px] font-mono font-medium transition ${
                 activeAuthorityFilter === 'ALL'
                   ? 'bg-[#121212] text-white font-bold'
-                  : 'bg-white text-neutral-600 hover:text-black border border-neutral-300'
+                  : 'bg-white text-neutral-600 hover:text-black rounded-xl border border-neutral-300'
               }`}
             >
               Tümü

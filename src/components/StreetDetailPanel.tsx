@@ -54,7 +54,7 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
   const streetUtilityWorks = utilityWorks.filter((w) => w.streetId === street.id);
 
   return (
-    <div className="bg-white border border-neutral-300 shadow-sm flex flex-col max-h-[85vh] lg:max-h-[calc(100vh-140px)] overflow-hidden text-[#121212]">
+    <div className="bg-white rounded-xl border border-neutral-300 shadow-sm flex flex-col max-h-[85vh] lg:max-h-[calc(100vh-140px)] overflow-hidden text-[#121212]">
       {/* Header Banner with Authority Color Indicator */}
       <div 
         className="p-3.5 border-b border-neutral-300 relative flex items-start justify-between gap-3 bg-white"
@@ -68,7 +68,7 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
             >
               {meta.name}
             </span>
-            <span className="bg-neutral-100 text-neutral-700 px-2 py-0.5 text-[10px] font-mono uppercase border border-neutral-200">
+            <span className="bg-neutral-100 text-neutral-700 px-2 py-0.5 text-[10px] font-mono uppercase rounded-xl border border-neutral-200">
               {street.roadType.toUpperCase()}
             </span>
             {street.verifiedByCommunity && (
@@ -148,7 +148,7 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
                     {work.title}
                   </div>
 
-                  <div className="bg-white border border-neutral-300 p-2 space-y-1 font-mono text-[11px]">
+                  <div className="bg-white rounded-xl border border-neutral-300 p-2 space-y-1 font-mono text-[11px]">
                     <div className="flex items-center justify-between">
                       <span className="text-neutral-500 flex items-center gap-1">
                         <Clock className="w-3 h-3 text-[#C2410C]" /> Saatler:
@@ -205,7 +205,7 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
         )}
 
         {/* Responsible Authority Box */}
-        <div className="bg-[#F8F9FA] border border-neutral-300 p-3 space-y-2">
+        <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-3 space-y-2">
           <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-500 flex items-center justify-between">
             <span>RESMİ SORUMLU İDARE & YETKİLİ BİRİM</span>
             <span className="text-[#1D4ED8] flex items-center gap-1 font-bold">
@@ -228,19 +228,19 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
 
         {/* Road Specs Grid */}
         <div className="grid grid-cols-3 gap-2 text-center font-mono">
-          <div className="bg-[#F8F9FA] p-2 border border-neutral-300">
+          <div className="bg-[#F8F9FA] p-2 rounded-xl border border-neutral-300">
             <div className="text-[10px] text-neutral-500">UZUNLUK</div>
             <div className="text-xs font-bold text-[#121212]">
               {(street.lengthMeters / 1000).toFixed(1)} km
             </div>
           </div>
-          <div className="bg-[#F8F9FA] p-2 border border-neutral-300">
+          <div className="bg-[#F8F9FA] p-2 rounded-xl border border-neutral-300">
             <div className="text-[10px] text-neutral-500">ŞERİT SAYISI</div>
             <div className="text-xs font-bold text-[#121212]">
               {street.laneCount === 0 ? 'Yaya Alanı' : `${street.laneCount} Şerit`}
             </div>
           </div>
-          <div className="bg-[#F8F9FA] p-2 border border-neutral-300">
+          <div className="bg-[#F8F9FA] p-2 rounded-xl border border-neutral-300">
             <div className="text-[10px] text-neutral-500">KRONİK SKOR</div>
             <div className={`text-xs font-bold ${street.chronicScore > 60 ? 'text-[#C2410C]' : 'text-[#047857]'}`}>
               %{street.chronicScore}
@@ -264,7 +264,7 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => onOpenComplaintModal(street)}
-              className="bg-white hover:bg-neutral-100 text-[#121212] font-semibold py-2 px-2.5 border border-neutral-300 flex items-center justify-center gap-1.5 transition text-xs"
+              className="bg-white hover:bg-neutral-100 text-[#121212] font-semibold py-2 px-2.5 rounded-xl border border-neutral-300 flex items-center justify-center gap-1.5 transition text-xs"
             >
               <MessageSquare className="w-3.5 h-3.5 text-[#1D4ED8]" />
               <span>Şikayet / Yorum</span>
@@ -294,7 +294,7 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
         </div>
 
         {/* Community Verification Status */}
-        <div className="bg-[#F8F9FA] p-2 border border-neutral-300 text-[11px] flex items-center justify-between font-mono">
+        <div className="bg-[#F8F9FA] p-2 rounded-xl border border-neutral-300 text-[11px] flex items-center justify-between font-mono">
           <span className="text-neutral-500">Topluluk Teyidi:</span>
           <div className="flex items-center gap-2">
             <span className="text-[#047857] font-bold">✓ {street.communityVotes.correct} Doğru</span>
@@ -312,7 +312,7 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
           </div>
 
           {streetComplaints.length === 0 ? (
-            <div className="p-3 bg-[#F8F9FA] border border-neutral-200 text-center text-neutral-500 text-xs">
+            <div className="p-3 bg-[#F8F9FA] rounded-xl border border-neutral-200 text-center text-neutral-500 text-xs">
               Bu cadde için henüz kayıtlı şikayet bulunmamaktadır.
             </div>
           ) : (
@@ -320,7 +320,7 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
               {streetComplaints.map((c) => {
                 const cat = CATEGORY_DETAILS[c.category] || CATEGORY_DETAILS.diger;
                 return (
-                  <div key={c.id} className="bg-[#F8F9FA] p-2.5 border border-neutral-300 text-xs">
+                  <div key={c.id} className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-300 text-xs">
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-bold text-[#121212]">{c.title}</span>
                       <span

@@ -31,7 +31,7 @@ export const HeatmapView: React.FC<HeatmapViewProps> = ({
   return (
     <div className="max-w-7xl mx-auto p-3 sm:p-5">
       {/* Banner */}
-      <div className="bg-white border border-neutral-300 p-4 mb-5 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[#121212]">
+      <div className="bg-white rounded-xl border border-neutral-300 p-4 mb-5 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-[#121212]">
         <div>
           <div className="flex items-center gap-2">
             <span className="bg-red-50 text-red-700 text-[10px] font-mono font-bold px-2 py-0.5 border border-red-200 flex items-center gap-1">
@@ -48,11 +48,11 @@ export const HeatmapView: React.FC<HeatmapViewProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="bg-[#F8F9FA] p-2.5 border border-neutral-300 text-center font-mono">
+          <div className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-300 text-center font-mono">
             <div className="text-[10px] text-neutral-500">KRİTİK ARTER</div>
             <div className="text-sm font-bold text-red-600">{criticalStreets.length} Yol</div>
           </div>
-          <div className="bg-[#F8F9FA] p-2.5 border border-neutral-300 text-center font-mono">
+          <div className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-300 text-center font-mono">
             <div className="text-[10px] text-neutral-500">ORTALAMA SKOR</div>
             <div className="text-sm font-bold text-[#C2410C]">
               %{Math.round(streets.reduce((acc, s) => acc + s.chronicScore, 0) / (streets.length || 1))}
@@ -79,10 +79,10 @@ export const HeatmapView: React.FC<HeatmapViewProps> = ({
               return (
                 <div
                   key={street.id}
-                  className="bg-white border border-neutral-300 hover:border-neutral-400 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs transition text-[#121212]"
+                  className="bg-white rounded-xl border border-neutral-300 hover:border-neutral-400 p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs transition text-[#121212]"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="w-7 h-7 bg-[#F8F9FA] border border-neutral-300 flex items-center justify-center font-mono font-bold text-xs text-neutral-700 shrink-0 mt-0.5">
+                    <div className="w-7 h-7 bg-[#F8F9FA] rounded-xl border border-neutral-300 flex items-center justify-center font-mono font-bold text-xs text-neutral-700 shrink-0 mt-0.5">
                       #{idx + 1}
                     </div>
 
@@ -134,7 +134,7 @@ export const HeatmapView: React.FC<HeatmapViewProps> = ({
 
                     <button
                       onClick={() => onSelectStreetAndOpenMap(street.id)}
-                      className="bg-white hover:bg-neutral-100 text-[#121212] border border-neutral-300 px-3 py-1.5 text-xs font-mono font-bold flex items-center gap-1 transition shadow-xs"
+                      className="bg-white hover:bg-neutral-100 text-[#121212] rounded-xl border border-neutral-300 px-3 py-1.5 text-xs font-mono font-bold flex items-center gap-1 transition shadow-xs"
                       title="Haritada göster"
                     >
                       <MapPin className="w-3.5 h-3.5 text-[#1D4ED8]" />
@@ -151,7 +151,7 @@ export const HeatmapView: React.FC<HeatmapViewProps> = ({
         {/* Right 4 Cols: Root-Cause Insights & Breakdown */}
         <div className="lg:col-span-4 space-y-4">
           {/* Authority Problem Share */}
-          <div className="bg-white border border-neutral-300 p-4 text-xs space-y-3 shadow-xs">
+          <div className="bg-white rounded-xl border border-neutral-300 p-4 text-xs space-y-3 shadow-xs">
             <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#121212] border-b border-neutral-200 pb-2">
               KURUM BAZLI SORUN DAĞILIMI
             </div>
@@ -167,7 +167,7 @@ export const HeatmapView: React.FC<HeatmapViewProps> = ({
                 );
 
                 return (
-                  <div key={authType} className="bg-[#F8F9FA] p-2.5 border border-neutral-300">
+                  <div key={authType} className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-300">
                     <div className="flex items-center justify-between mb-1.5 font-mono">
                       <div className="flex items-center gap-1.5">
                         <span
@@ -201,27 +201,27 @@ export const HeatmapView: React.FC<HeatmapViewProps> = ({
           </div>
 
           {/* Root-Cause Breakdown */}
-          <div className="bg-white border border-neutral-300 p-4 text-xs space-y-2.5 shadow-xs">
+          <div className="bg-white rounded-xl border border-neutral-300 p-4 text-xs space-y-2.5 shadow-xs">
             <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#121212] border-b border-neutral-200 pb-2">
               KRONİK SORUNLARIN KÖK NEDENLERİ
             </div>
 
             <div className="space-y-2 text-neutral-700 text-[11px] leading-relaxed">
-              <div className="p-2 bg-[#F8F9FA] border border-neutral-300">
+              <div className="p-2 bg-[#F8F9FA] rounded-xl border border-neutral-300">
                 <div className="font-bold text-[#121212] mb-0.5">1. Altyapı Kazıları Sonrası Asfalt Gecikmesi (%42)</div>
                 <p className="text-neutral-500 text-[10px]">
                   İSKİ, ASKİ, BEDAŞ, İGDAŞ kazıları sonrası finişerli sıcak asfalt seriminin gecikmesi çukurlara yol açmaktadır.
                 </p>
               </div>
 
-              <div className="p-2 bg-[#F8F9FA] border border-neutral-300">
+              <div className="p-2 bg-[#F8F9FA] rounded-xl border border-neutral-300">
                 <div className="font-bold text-[#121212] mb-0.5">2. Ağır Tonaj & Kamyon Güzergahı Aşınması (%28)</div>
                 <p className="text-neutral-500 text-[10px]">
                   Hafriyat kamyonlarının kullandığı D-100 ve bağlantı yollarında tekerlek izi oturması (rutting) görülmektedir.
                 </p>
               </div>
 
-              <div className="p-2 bg-[#F8F9FA] border border-neutral-300">
+              <div className="p-2 bg-[#F8F9FA] rounded-xl border border-neutral-300">
                 <div className="font-bold text-[#121212] mb-0.5">3. Yetki Sınırı Belirsizliği (%18)</div>
                 <p className="text-neutral-500 text-[10px]">
                   İlçe ile Büyükşehir sınırındaki 12-14 metre genişlikteki geçiş arterlerinde kurumların topu birbirine atması.

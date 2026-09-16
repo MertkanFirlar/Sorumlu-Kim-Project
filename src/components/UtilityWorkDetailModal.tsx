@@ -100,10 +100,10 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-150">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-xs sk-fade-in z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-150">
       <div 
         id="utility-work-detail-modal"
-        className="bg-white border border-neutral-300 max-w-2xl w-full p-4 sm:p-6 shadow-2xl text-[#121212] text-xs space-y-4 max-h-[90vh] overflow-y-auto"
+        className="bg-white sk-pop-in rounded-2xl border border-neutral-300 max-w-2xl w-full p-4 sm:p-6 shadow-2xl text-[#121212] text-xs space-y-4 max-h-[90vh] overflow-y-auto"
       >
         {/* Header */}
         <div className="flex items-start justify-between border-b border-neutral-200 pb-3 gap-3">
@@ -126,7 +126,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
                   Şu An Aktif Mesai
                 </span>
               ) : (
-                <span className="bg-neutral-100 text-neutral-600 border border-neutral-300 px-1.5 py-0.5 text-[10px] font-mono">
+                <span className="bg-neutral-100 text-neutral-600 rounded-xl border border-neutral-300 px-1.5 py-0.5 text-[10px] font-mono">
                   Mesai Dışı / Şerit Açık
                 </span>
               )}
@@ -152,11 +152,11 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
         </div>
 
         {/* Real-time sync & Permit bar */}
-        <div className="bg-[#F8F9FA] border border-neutral-300 p-2.5 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px]">
+        <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2.5 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px]">
           <div className="flex items-center gap-1.5 text-neutral-700">
             <Activity className="w-3.5 h-3.5 text-[#1D4ED8]" />
             <span>Ruhsat / İzin No:</span>
-            <span className="font-bold text-[#121212] bg-white px-1.5 py-0.5 border border-neutral-300">{work.permitNumber}</span>
+            <span className="font-bold text-[#121212] bg-white px-1.5 py-0.5 rounded-xl border border-neutral-300">{work.permitNumber}</span>
           </div>
 
           <div className="text-neutral-500 text-[10px] flex items-center gap-1">
@@ -166,7 +166,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
         </div>
 
         {/* Standard Working Hours & Schedule */}
-        <div className="bg-[#F8F9FA] border border-neutral-300 p-3.5 space-y-2">
+        <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-3.5 space-y-2">
           <div className="flex items-center justify-between text-[10px] font-mono uppercase font-bold text-neutral-500">
             <span className="flex items-center gap-1.5 text-[#121212]">
               <Clock className="w-3.5 h-3.5 text-[#C2410C]" />
@@ -175,7 +175,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
             <span className="text-neutral-500">Vardiya Tipi: {work.standardWorkingHours.shiftType.toUpperCase()}</span>
           </div>
 
-          <div className="bg-white border border-neutral-300 p-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="bg-white rounded-xl border border-neutral-300 p-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <div className="text-xs font-black text-[#121212] flex items-center gap-2">
                 <span>{work.standardWorkingHours.scheduleText}</span>
@@ -185,7 +185,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
               </p>
             </div>
             
-            <div className="shrink-0 font-mono text-[10px] bg-neutral-100 px-2 py-1 border border-neutral-200 text-neutral-700">
+            <div className="shrink-0 font-mono text-[10px] bg-neutral-100 px-2 py-1 rounded-xl border border-neutral-200 text-neutral-700">
               Başlangıç: {work.startDate} <br />
               Tahmini Bitiş: {work.endDate}
             </div>
@@ -194,7 +194,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
 
         {/* Description & Traffic Impact */}
         <div className="space-y-3">
-          <div className="bg-white border border-neutral-300 p-3 space-y-1.5">
+          <div className="bg-white rounded-xl border border-neutral-300 p-3 space-y-1.5">
             <div className="text-[10px] font-mono uppercase font-bold text-neutral-500">
               Çalışma Kapsamı ve Detayı
             </div>
@@ -219,7 +219,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
 
         {/* Responsible Agency & Contractor Details */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="bg-[#F8F9FA] border border-neutral-300 p-3 space-y-1.5">
+          <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-3 space-y-1.5">
             <div className="text-[10px] font-mono uppercase font-bold text-neutral-500 flex items-center gap-1">
               <Building2 className="w-3 h-3 text-neutral-500" /> Sorumlu Kamu / Altyapı İdaresi
             </div>
@@ -229,7 +229,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
             </div>
           </div>
 
-          <div className="bg-[#F8F9FA] border border-neutral-300 p-3 space-y-1.5">
+          <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-3 space-y-1.5">
             <div className="text-[10px] font-mono uppercase font-bold text-neutral-500 flex items-center gap-1">
               <Wrench className="w-3 h-3 text-neutral-500" /> Yüklenici / Uygulayıcı Birim
             </div>
@@ -241,13 +241,13 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
         </div>
 
         {/* Progress Bar & Safety Measures */}
-        <div className="bg-[#F8F9FA] border border-neutral-300 p-3 space-y-2">
+        <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-3 space-y-2">
           <div className="flex items-center justify-between text-[10px] font-mono uppercase font-bold text-neutral-500">
             <span>ÇALIŞMA İLERLEME SEVİYESİ</span>
             <span className="font-bold text-[#121212] font-mono">%{work.progressPercentage} Tamamlandı</span>
           </div>
 
-          <div className="w-full bg-neutral-200 h-2 overflow-hidden border border-neutral-300">
+          <div className="w-full bg-neutral-200 h-2 overflow-hidden rounded-xl border border-neutral-300">
             <div 
               className="h-full transition-all duration-500"
               style={{ 
@@ -262,7 +262,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
             <div className="text-[10px] font-mono uppercase text-neutral-500 mb-1.5">Saha Güvenlik Tedbirleri:</div>
             <div className="flex flex-wrap gap-1.5">
               {work.safetyMeasures.map((measure, idx) => (
-                <span key={idx} className="bg-white border border-neutral-300 px-2 py-0.5 text-[10px] font-mono text-neutral-700 flex items-center gap-1">
+                <span key={idx} className="bg-white rounded-xl border border-neutral-300 px-2 py-0.5 text-[10px] font-mono text-neutral-700 flex items-center gap-1">
                   <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                   {measure}
                 </span>
@@ -272,7 +272,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
         </div>
 
         {/* Citizen Reporting / Complaint for Work Non-compliance */}
-        <div className="bg-white border border-neutral-300 p-3 space-y-2">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3 space-y-2">
           <div className="text-[10px] font-mono uppercase font-bold text-neutral-500 flex items-center justify-between">
             <span className="flex items-center gap-1.5 text-[#121212]">
               <MessageSquare className="w-3.5 h-3.5 text-[#1D4ED8]" />
@@ -292,7 +292,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
                 <select
                   value={reportType}
                   onChange={(e) => setReportType(e.target.value)}
-                  className="bg-[#F8F9FA] border border-neutral-300 px-2 py-1 text-xs text-[#121212] font-mono font-medium focus:outline-none focus:border-[#121212]"
+                  className="bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2 py-1 text-xs text-[#121212] font-mono font-medium focus:outline-none focus:border-[#121212]"
                 >
                   <option value="guvenlik_barikati">Emniyet Barikatı / Aydınlatma Eksik</option>
                   <option value="mesai_disi_gurultu">İzinsiz Mesai Dışı Gece Gürültüsü</option>
@@ -306,7 +306,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
                   value={citizenReportText}
                   onChange={(e) => setCitizenReportText(e.target.value)}
                   placeholder="Ek açıklama veya detay giriniz..."
-                  className="flex-1 bg-[#F8F9FA] border border-neutral-300 px-2 py-1 text-xs text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white"
+                  className="flex-1 bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2 py-1 text-xs text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white"
                 />
 
                 <button
@@ -395,7 +395,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
 
               <button
                 onClick={onClose}
-                className="bg-neutral-100 hover:bg-neutral-200 text-neutral-800 px-3 py-1.5 text-xs font-semibold border border-neutral-300"
+                className="bg-neutral-100 hover:bg-neutral-200 text-neutral-800 px-3 py-1.5 text-xs font-semibold rounded-xl border border-neutral-300"
               >
                 Kapat
               </button>
@@ -404,7 +404,7 @@ export const UtilityWorkDetailModal: React.FC<UtilityWorkDetailModalProps> = ({
 
           {/* Interactive Popover Box (When clicked or hovered) */}
           {(activeInfo || hoveredInfo) && (
-            <div className="bg-[#F8F9FA] border border-neutral-300 p-2.5 text-xs font-mono relative">
+            <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2.5 text-xs font-mono relative">
               <button
                 type="button"
                 onClick={() => {

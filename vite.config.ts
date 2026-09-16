@@ -5,6 +5,9 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    // Relative base so assets resolve under the GitHub Pages project subpath
+    // (e.g. username.github.io/Sorumlu-Kim-Project/) as well as at the root.
+    base: './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

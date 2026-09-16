@@ -123,7 +123,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-5 py-4 space-y-4 text-[#121212]">
       {/* Top Banner & AYKOME Live Sync Bar */}
-      <div className="bg-white border border-neutral-300 p-4 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div className="bg-white rounded-xl border border-neutral-300 p-4 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-[#121212] flex items-center justify-center text-white">
@@ -146,7 +146,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
         </div>
 
         {/* Live Sync Status & Trigger */}
-        <div className="flex items-center gap-2 font-mono text-xs self-start md:self-auto bg-[#F8F9FA] p-2 border border-neutral-300">
+        <div className="flex items-center gap-2 font-mono text-xs self-start md:self-auto bg-[#F8F9FA] p-2 rounded-xl border border-neutral-300">
           <div className="flex items-center gap-1.5 text-neutral-600 text-[11px]">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
             <span>Canlı Veri Senkronizasyonu:</span>
@@ -156,7 +156,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
           <button
             onClick={handleSyncRefresh}
             disabled={isSyncing}
-            className="flex items-center gap-1 bg-white hover:bg-neutral-100 border border-neutral-300 px-2 py-1 text-[11px] font-bold text-[#121212] shadow-xs"
+            className="flex items-center gap-1 bg-white hover:bg-neutral-100 rounded-xl border border-neutral-300 px-2 py-1 text-[11px] font-bold text-[#121212] shadow-xs"
             title="AYKOME ve Su/Gaz İdareleri API Verisini Yenile"
           >
             <RefreshCw className={`w-3 h-3 text-[#1D4ED8] ${isSyncing ? 'animate-spin' : ''}`} />
@@ -167,13 +167,13 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
 
       {/* Summary KPI Cards Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 font-mono">
-        <div className="bg-white border border-neutral-300 p-3">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3">
           <div className="text-[10px] text-neutral-500 uppercase font-bold">KAYITLI KAMU ÇALIŞMASI</div>
           <div className="text-xl font-black text-[#121212] mt-0.5">{metrics.total}</div>
           <div className="text-[10px] text-neutral-500 mt-1">AYKOME Onaylı Ruhsatlı Alan</div>
         </div>
 
-        <div className="bg-white border border-neutral-300 p-3">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3">
           <div className="text-[10px] text-neutral-500 uppercase font-bold flex items-center gap-1">
             <span className="w-2 h-2 rounded-full bg-red-600"></span>
             ŞU AN AKTİF MESAİ
@@ -182,7 +182,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
           <div className="text-[10px] text-neutral-500 mt-1">Saha Ekipleri Çalışıyor</div>
         </div>
 
-        <div className="bg-white border border-neutral-300 p-3">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3">
           <div className="text-[10px] text-neutral-500 uppercase font-bold flex items-center gap-1">
             <AlertTriangle className="w-3 h-3 text-[#DC2626]" />
             KRİTİK / ŞERİT KAPAMA
@@ -191,7 +191,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
           <div className="text-[10px] text-neutral-500 mt-1">Ağır Trafik & Alternatif Rota</div>
         </div>
 
-        <div className="bg-white border border-neutral-300 p-3">
+        <div className="bg-white rounded-xl border border-neutral-300 p-3">
           <div className="text-[10px] text-neutral-500 uppercase font-bold flex items-center gap-1">
             <Clock className="w-3 h-3 text-[#C2410C]" />
             GECE MESAİSİ REJİMİ
@@ -202,7 +202,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
       </div>
 
       {/* Filter and Search Toolbar */}
-      <div className="bg-white border border-neutral-300 p-3 space-y-3 shadow-xs">
+      <div className="bg-white rounded-xl border border-neutral-300 p-3 space-y-3 shadow-xs">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           {/* Search Bar */}
           <div className="relative flex-1 max-w-md">
@@ -212,7 +212,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cadde, ilçe, kurum (İSKİ, BEDAŞ vb.) veya ruhsat no ara..."
-              className="w-full bg-[#F8F9FA] border border-neutral-300 pl-9 pr-3 py-1.5 text-xs text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white font-medium"
+              className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 pl-9 pr-3 py-1.5 text-xs text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white font-medium"
             />
           </div>
 
@@ -225,7 +225,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
                 className={`px-3 py-1 text-xs font-bold transition ${
                   activeCity === c
                     ? 'bg-[#121212] text-white shadow-xs'
-                    : 'bg-[#F8F9FA] border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
+                    : 'bg-[#F8F9FA] rounded-xl border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
                 {c === 'ALL' ? 'Tüm Şehirler' : c}
@@ -243,7 +243,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
               className={`px-2.5 py-1 text-xs font-mono font-bold transition ${
                 selectedCategory === 'ALL'
                   ? 'bg-[#121212] text-white'
-                  : 'bg-[#F8F9FA] border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
+                  : 'bg-[#F8F9FA] rounded-xl border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
               }`}
             >
               Tüm Kategoriler
@@ -259,7 +259,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
                   className={`px-2 py-1 text-xs font-mono flex items-center gap-1.5 transition ${
                     isSelected
                       ? 'bg-[#121212] text-white font-bold'
-                      : 'bg-[#F8F9FA] border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
+                      : 'bg-[#F8F9FA] rounded-xl border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
                   }`}
                 >
                   <span className="w-2 h-2 rounded-full" style={{ backgroundColor: meta.color }}></span>
@@ -274,7 +274,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
             <select
               value={selectedSeverity}
               onChange={(e) => setSelectedSeverity(e.target.value as WorkSeverity | 'ALL')}
-              className="bg-[#F8F9FA] border border-neutral-300 px-2 py-1 text-xs text-[#121212] font-mono focus:outline-none focus:border-[#121212]"
+              className="bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2 py-1 text-xs text-[#121212] font-mono focus:outline-none focus:border-[#121212]"
             >
               <option value="ALL">Tüm Uyarı Seviyeleri</option>
               <option value="kritik">🔴 Kritik / Tam Şerit Kapatma</option>
@@ -307,7 +307,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
         </div>
 
         {filteredWorks.length === 0 ? (
-          <div className="bg-white border border-neutral-300 p-8 text-center text-neutral-500 space-y-2">
+          <div className="bg-white rounded-xl border border-neutral-300 p-8 text-center text-neutral-500 space-y-2">
             <Info className="w-8 h-8 text-neutral-400 mx-auto" />
             <p className="font-semibold text-sm">Seçili filtrelere uygun kamu çalışması bulunamadı.</p>
             <p className="text-xs">Filtreleri sıfırlayarak veya arama terimini değiştirerek tekrar deneyebilirsiniz.</p>
@@ -326,7 +326,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
               return (
                 <div
                   key={work.id}
-                  className="bg-white border border-neutral-300 hover:border-neutral-400 p-4 shadow-xs transition flex flex-col justify-between space-y-3"
+                  className="bg-white rounded-xl border border-neutral-300 hover:border-neutral-400 p-4 shadow-xs transition flex flex-col justify-between space-y-3"
                   style={{ borderLeft: `4px solid ${sevMeta.hex}` }}
                 >
                   {/* Top Header */}
@@ -364,7 +364,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
                   </div>
 
                   {/* Shift & Traffic Impact Box */}
-                  <div className="bg-[#F8F9FA] border border-neutral-300 p-2.5 space-y-1.5 text-xs font-mono">
+                  <div className="bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2.5 space-y-1.5 text-xs font-mono">
                     <div className="flex items-center justify-between text-[11px]">
                       <span className="text-neutral-500 flex items-center gap-1">
                         <Clock className="w-3 h-3 text-[#C2410C]" /> Çalışma Saatleri:
@@ -393,7 +393,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
                       </span>
                     </div>
 
-                    <div className="w-full bg-neutral-200 h-1.5 overflow-hidden border border-neutral-300">
+                    <div className="w-full bg-neutral-200 h-1.5 overflow-hidden rounded-xl border border-neutral-300">
                       <div 
                         className="h-full"
                         style={{ 
@@ -408,7 +408,7 @@ export const UtilityWorksView: React.FC<UtilityWorksViewProps> = ({
                   <div className="flex items-center justify-between gap-2 pt-2 border-t border-neutral-200">
                     <button
                       onClick={() => onSelectWork(work)}
-                      className="bg-neutral-100 hover:bg-neutral-200 text-neutral-800 px-3 py-1.5 text-xs font-semibold border border-neutral-300 flex items-center gap-1"
+                      className="bg-neutral-100 hover:bg-neutral-200 text-neutral-800 px-3 py-1.5 text-xs font-semibold rounded-xl border border-neutral-300 flex items-center gap-1"
                     >
                       <Info className="w-3.5 h-3.5 text-neutral-600" />
                       <span>Detay & İzin İncele</span>

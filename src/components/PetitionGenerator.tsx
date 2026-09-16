@@ -147,7 +147,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
   return (
     <div className="max-w-7xl mx-auto p-3 sm:p-5">
       {/* Editorial Header */}
-      <div className="bg-white border border-neutral-300 rounded-none p-4 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 shadow-xs">
+      <div className="bg-white rounded-xl border border-neutral-300 rounded-none p-4 mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3 shadow-xs">
         <div>
           <div className="flex items-center gap-2">
             <span className="bg-emerald-50 text-[#047857] text-[10px] font-mono font-bold px-2 py-0.5 border border-emerald-300">
@@ -163,7 +163,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
         </div>
 
         {/* Selected Streets Badge List */}
-        <div className="bg-[#F8F9FA] p-2.5 border border-neutral-300 text-xs">
+        <div className="bg-[#F8F9FA] p-2.5 rounded-xl border border-neutral-300 text-xs">
           <div className="text-[10px] font-mono font-bold text-neutral-500 uppercase flex items-center justify-between mb-1.5">
             <span>Seçili Güzergah ({selectedStreets.length})</span>
             {selectedStreets.length > 0 && (
@@ -184,7 +184,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
               {selectedStreets.map((s) => (
                 <span
                   key={s.id}
-                  className="bg-white text-[#121212] border border-neutral-300 px-2 py-0.5 text-[11px] font-mono flex items-center gap-1 shadow-xs"
+                  className="bg-white text-[#121212] rounded-xl border border-neutral-300 px-2 py-0.5 text-[11px] font-mono flex items-center gap-1 shadow-xs"
                 >
                   <span>{s.name}</span>
                   <button
@@ -203,7 +203,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
       {/* Grid: Form on left, Live A4 Paper on right */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Form Inputs (Left 5 Cols) */}
-        <div className="lg:col-span-5 space-y-3.5 bg-white border border-neutral-300 p-4 text-xs shadow-xs">
+        <div className="lg:col-span-5 space-y-3.5 bg-white rounded-xl border border-neutral-300 p-4 text-xs shadow-xs">
           <div className="text-xs font-black font-mono text-[#121212] uppercase tracking-wider border-b border-neutral-200 pb-2">
             1. BAŞVURU SAHİBİ VE MUHATAP BİLGİLERİ
           </div>
@@ -216,7 +216,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
                 type="text"
                 value={formData.applicantName}
                 onChange={(e) => setFormData({ ...formData, applicantName: e.target.value })}
-                className="w-full bg-[#F8F9FA] border border-neutral-300 px-2.5 py-1.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white font-medium"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2.5 py-1.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white font-medium"
               />
             </div>
             <div>
@@ -226,7 +226,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
                 maxLength={11}
                 value={formData.applicantTckn}
                 onChange={(e) => setFormData({ ...formData, applicantTckn: e.target.value })}
-                className="w-full bg-[#F8F9FA] border border-neutral-300 px-2.5 py-1.5 text-[#121212] font-mono focus:outline-none focus:border-[#121212] focus:bg-white"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2.5 py-1.5 text-[#121212] font-mono focus:outline-none focus:border-[#121212] focus:bg-white"
               />
             </div>
           </div>
@@ -238,7 +238,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
                 type="text"
                 value={formData.applicantPhone}
                 onChange={(e) => setFormData({ ...formData, applicantPhone: e.target.value })}
-                className="w-full bg-[#F8F9FA] border border-neutral-300 px-2.5 py-1.5 text-[#121212] font-mono focus:outline-none focus:border-[#121212] focus:bg-white"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2.5 py-1.5 text-[#121212] font-mono focus:outline-none focus:border-[#121212] focus:bg-white"
               />
             </div>
             <div>
@@ -247,7 +247,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
                 type="email"
                 value={formData.applicantEmail}
                 onChange={(e) => setFormData({ ...formData, applicantEmail: e.target.value })}
-                className="w-full bg-[#F8F9FA] border border-neutral-300 px-2.5 py-1.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2.5 py-1.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white"
               />
             </div>
           </div>
@@ -258,7 +258,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
               type="text"
               value={formData.applicantAddress}
               onChange={(e) => setFormData({ ...formData, applicantAddress: e.target.value })}
-              className="w-full bg-[#F8F9FA] border border-neutral-300 px-2.5 py-1.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white"
+              className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2.5 py-1.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white"
             />
           </div>
 
@@ -274,7 +274,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
                 type="text"
                 value={formData.targetAuthorityName}
                 onChange={(e) => setFormData({ ...formData, targetAuthorityName: e.target.value })}
-                className="w-full bg-[#F8F9FA] border border-neutral-300 px-2.5 py-1.5 text-[#121212] font-mono text-[11px] focus:outline-none focus:border-[#121212] focus:bg-white"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2.5 py-1.5 text-[#121212] font-mono text-[11px] focus:outline-none focus:border-[#121212] focus:bg-white"
               />
             </div>
 
@@ -309,7 +309,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
                 type="text"
                 value={formData.subjectTitle}
                 onChange={(e) => setFormData({ ...formData, subjectTitle: e.target.value })}
-                className="w-full bg-[#F8F9FA] border border-neutral-300 px-2.5 py-1.5 text-[#121212] font-bold focus:outline-none focus:border-[#121212] focus:bg-white"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 px-2.5 py-1.5 text-[#121212] font-bold focus:outline-none focus:border-[#121212] focus:bg-white"
               />
             </div>
 
@@ -319,7 +319,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
                 rows={3}
                 value={formData.incidentDetails}
                 onChange={(e) => setFormData({ ...formData, incidentDetails: e.target.value })}
-                className="w-full bg-[#F8F9FA] border border-neutral-300 p-2.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white leading-relaxed font-sans"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white leading-relaxed font-sans"
               />
             </div>
 
@@ -329,7 +329,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
                 rows={2}
                 value={formData.demandRequest}
                 onChange={(e) => setFormData({ ...formData, demandRequest: e.target.value })}
-                className="w-full bg-[#F8F9FA] border border-neutral-300 p-2.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white leading-relaxed"
+                className="w-full bg-[#F8F9FA] rounded-xl border border-neutral-300 p-2.5 text-[#121212] focus:outline-none focus:border-[#121212] focus:bg-white leading-relaxed"
               />
             </div>
           </div>
@@ -338,7 +338,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
         {/* Live A4 Paper Sheet Preview (Right 7 Cols) */}
         <div className="lg:col-span-7 flex flex-col space-y-3">
           {/* Dispatch Action Bar */}
-          <div className="bg-white border border-neutral-300 p-3 flex flex-wrap items-center justify-between gap-2 shadow-xs">
+          <div className="bg-white rounded-xl border border-neutral-300 p-3 flex flex-wrap items-center justify-between gap-2 shadow-xs">
             <div className="flex items-center gap-2">
               <button
                 onClick={handleDownloadPDF}
@@ -350,7 +350,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
 
               <button
                 onClick={handleCopyText}
-                className="bg-white hover:bg-neutral-100 text-[#121212] font-semibold py-1.5 px-3 text-xs border border-neutral-300 flex items-center gap-1.5 transition"
+                className="bg-white hover:bg-neutral-100 text-[#121212] font-semibold py-1.5 px-3 text-xs rounded-xl border border-neutral-300 flex items-center gap-1.5 transition"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-[#047857]" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Kopyalandı!' : 'Metni Kopyala'}</span>
@@ -358,7 +358,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
 
               <button
                 onClick={handlePrint}
-                className="hidden sm:flex items-center gap-1.5 bg-white hover:bg-neutral-100 text-[#121212] py-1.5 px-2.5 text-xs border border-neutral-300"
+                className="hidden sm:flex items-center gap-1.5 bg-white hover:bg-neutral-100 text-[#121212] py-1.5 px-2.5 text-xs rounded-xl border border-neutral-300"
               >
                 <Printer className="w-3.5 h-3.5" />
                 <span>Yazdır</span>
@@ -388,10 +388,10 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
           </div>
 
           {/* Formal Turkish A4 Paper Layout Container */}
-          <div className="bg-[#E9ECEF] p-4 border border-neutral-300 flex justify-center overflow-x-auto">
+          <div className="bg-[#E9ECEF] p-4 rounded-xl border border-neutral-300 flex justify-center overflow-x-auto">
             <div
               id="printable-petition"
-              className="w-full max-w-[650px] min-h-[750px] bg-white text-[#121212] p-8 sm:p-12 shadow-sm font-serif relative select-text border border-neutral-300"
+              className="w-full max-w-[650px] min-h-[750px] bg-white text-[#121212] p-8 sm:p-12 shadow-sm font-serif relative select-text rounded-xl border border-neutral-300"
               style={{ fontFamily: "'Times New Roman', Times, Georgia, serif" }}
             >
               {/* T.C. Formal Letterhead */}
@@ -419,7 +419,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
               </div>
 
               {/* Relevant Street Details */}
-              <div className="text-xs mb-4 bg-neutral-50 p-2.5 border border-neutral-300 font-sans">
+              <div className="text-xs mb-4 bg-neutral-50 p-2.5 rounded-xl border border-neutral-300 font-sans">
                 <span className="font-bold text-neutral-800">İLGİLİ CADDE / GÜZERGAH: </span>
                 <span className="text-neutral-700">
                   {formData.selectedStreets.length > 0
@@ -465,8 +465,8 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
 
       {/* CIMER Integration Bridge Modal */}
       {showCimerModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white border border-neutral-300 max-w-lg w-full p-5 shadow-2xl text-[#121212] text-xs space-y-4">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs sk-fade-in z-50 flex items-center justify-center p-4">
+          <div className="bg-white sk-pop-in rounded-2xl border border-neutral-300 max-w-lg w-full p-5 shadow-2xl text-[#121212] text-xs space-y-4">
             <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 bg-red-700 flex items-center justify-center font-bold text-white">
@@ -486,7 +486,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
               Cumhurbaşkanlığı İletişim Merkezi (CİMER) üzerinden doğrudan işlem başlatabilmeniz için hazırlanan resmi dilekçe metni panonuza kopyalandı.
             </p>
 
-            <div className="bg-[#F8F9FA] p-3 border border-neutral-300 space-y-2">
+            <div className="bg-[#F8F9FA] p-3 rounded-xl border border-neutral-300 space-y-2">
               <div className="font-bold text-[#121212] flex items-center gap-1.5">
                 <Check className="w-4 h-4 text-[#047857]" />
                 <span>3 Adımda Hızlı Gönderim:</span>
@@ -501,7 +501,7 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
             <div className="flex items-center justify-end gap-2 pt-2">
               <button
                 onClick={() => setShowCimerModal(false)}
-                className="px-3 py-1.5 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 font-semibold border border-neutral-300"
+                className="px-3 py-1.5 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 font-semibold rounded-xl border border-neutral-300"
               >
                 Kapat
               </button>
