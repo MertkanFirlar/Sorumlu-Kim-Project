@@ -261,7 +261,7 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8F9FA] text-[#121212] selection:bg-[#1D4ED8] selection:text-white font-sans">
+    <div className="flex flex-col h-dvh bg-[#F8F9FA] text-[#121212] selection:bg-[#1D4ED8] selection:text-white font-sans">
       {/* Top Main Responsive Navbar */}
       <Navbar
         currentTab={currentTab}
@@ -284,11 +284,11 @@ export default function App() {
       />
 
       {/* Main Viewport Container */}
-      <main className="flex-1 flex flex-col relative overflow-hidden">
+      <main className="flex-1 flex flex-col relative overflow-hidden min-h-0">
         {currentTab === 'harita' && (
-          <div className="flex-1 relative w-full h-[calc(100vh-105px)] min-h-[500px] bg-[#E9ECEF] overflow-hidden">
+          <div className="flex-1 relative w-full h-full bg-[#E9ECEF] overflow-hidden">
             {/* Full Space Map */}
-            <div className="w-full h-full min-h-[500px]">
+            <div className="w-full h-full">
               <InteractiveMap
                 streets={filteredStreets}
                 selectedStreet={selectedStreet}
