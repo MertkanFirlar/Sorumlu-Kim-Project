@@ -194,7 +194,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Secondary Row: Tabs & Authority Filter Filters */}
       <div className="max-w-7xl mx-auto px-3 sm:px-5 py-1.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 border-t border-neutral-200 bg-[#FAFAFA]">
         {/* Navigation Tabs */}
-        <nav className="flex items-center gap-1 overflow-x-auto pb-1 lg:pb-0 scrollbar-none">
+        <nav className="flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => onSelectTab('harita')}
             className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold whitespace-nowrap transition ${
@@ -204,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Map className="w-3.5 h-3.5" />
-            <span>Harita / Arama</span>
+            <span>Harita</span>
           </button>
 
           <button
@@ -216,7 +216,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Wrench className="w-3.5 h-3.5 text-[#C2410C]" />
-            <span>Kamu & Belediye Çalışmaları</span>
+            <span>Çalışmalar</span>
             {utilityWorksCount > 0 && (
               <span className="bg-red-600 text-white text-[10px] font-mono px-1 py-0.2 rounded-xs font-bold animate-pulse">
                 {utilityWorksCount}
@@ -233,7 +233,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>Şikayet & Yorumlar</span>
+            <span>Şikayetler</span>
           </button>
 
           <button
@@ -245,7 +245,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Flame className="w-3.5 h-3.5 text-[#C2410C]" />
-            <span>Sorumluluk Isı Haritası</span>
+            <span>Isı Haritası</span>
           </button>
 
           <button
@@ -257,7 +257,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <FileText className="w-3.5 h-3.5 text-[#047857]" />
-            <span>Resmi Dilekçe Oluşturucu</span>
+            <span>Dilekçe</span>
           </button>
 
           <button
@@ -274,7 +274,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* City and Authority Quick Filters */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 lg:pb-0">
+        <div className="flex flex-wrap items-center gap-2">
           {/* City Selector */}
           <select
             value={selectedCity}
@@ -291,7 +291,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </select>
 
           {/* Authority Type Filter Badges */}
-          <div className="flex items-center gap-1">
+          <div className="flex flex-wrap items-center gap-1">
             <button
               onClick={() => onSelectAuthorityFilter('ALL')}
               className={`px-2 py-0.5 text-[11px] font-mono font-medium transition ${
