@@ -294,7 +294,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex flex-wrap items-center gap-1">
             <button
               onClick={() => onSelectAuthorityFilter('ALL')}
-              className={`px-2 py-0.5 text-[11px] font-mono font-medium transition ${
+              className={`px-3 py-1 text-[11px] font-semibold whitespace-nowrap transition ${
                 activeAuthorityFilter === 'ALL'
                   ? 'bg-[#121212] text-white font-bold'
                   : 'bg-white text-neutral-600 hover:text-black rounded-xl border border-neutral-300'
@@ -304,7 +304,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => onSelectAuthorityFilter('BUYUKSEHIR')}
-              className={`px-2 py-0.5 text-[11px] font-mono font-medium transition ${
+              className={`px-3 py-1 text-[11px] font-semibold whitespace-nowrap transition ${
                 activeAuthorityFilter === 'BUYUKSEHIR'
                   ? 'bg-[#1D4ED8] text-white font-bold'
                   : 'bg-white text-[#1D4ED8] hover:bg-blue-50 border border-blue-300'
@@ -314,7 +314,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => onSelectAuthorityFilter('ILCE')}
-              className={`px-2 py-0.5 text-[11px] font-mono font-medium transition ${
+              className={`px-3 py-1 text-[11px] font-semibold whitespace-nowrap transition ${
                 activeAuthorityFilter === 'ILCE'
                   ? 'bg-[#047857] text-white font-bold'
                   : 'bg-white text-[#047857] hover:bg-emerald-50 border border-emerald-300'
@@ -324,7 +324,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => onSelectAuthorityFilter('KGM')}
-              className={`px-2 py-0.5 text-[11px] font-mono font-medium transition ${
+              className={`px-3 py-1 text-[11px] font-semibold whitespace-nowrap transition ${
                 activeAuthorityFilter === 'KGM'
                   ? 'bg-[#C2410C] text-white font-bold'
                   : 'bg-white text-[#C2410C] hover:bg-orange-50 border border-orange-300'
@@ -334,7 +334,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => onSelectAuthorityFilter('IL_OZEL')}
-              className={`px-2 py-0.5 text-[11px] font-mono font-medium transition ${
+              className={`px-3 py-1 text-[11px] font-semibold whitespace-nowrap transition ${
                 activeAuthorityFilter === 'IL_OZEL'
                   ? 'bg-[#6B21A8] text-white font-bold'
                   : 'bg-white text-[#6B21A8] hover:bg-purple-50 border border-purple-300'
