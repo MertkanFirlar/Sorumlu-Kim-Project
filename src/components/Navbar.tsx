@@ -13,7 +13,9 @@ import {
   Building2,
   ShieldAlert,
   Wrench,
-  Globe
+  Globe,
+  ChevronDown,
+  Check
 } from 'lucide-react';
 import { AuthorityType, StreetSegment, ViewTab } from '../types';
 import { AUTHORITIES_META } from '../data/mockData';
@@ -54,6 +56,24 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  // Custom city dropdown state
+  const [isCityOpen, setIsCityOpen] = useState(false);
+  const [citySearch, setCitySearch] = useState('');
+  const filteredProvinces = TURKEY_PROVINCES.filter(
+    (p) => p.name.toLowerCase().includes(citySearch.toLowerCase()) || p.code.includes(citySearch)
+  );
+  const showAllOption =
+    citySearch === '' || 'tüm türkiye'.includes(citySearch.toLowerCase());
+  const selectCity = (city: string) => {
+    onSelectCity(city);
+    setIsCityOpen(false);
+    setCitySearch('');
+  };
+  const cityItemClass = (val: string) =>
+    `w-full flex items-center justify-between gap-2 px-3 py-2 text-xs text-left transition ${
+      selectedCity === val ? 'bg-blue-50 text-[#1D4ED8] font-semibold' : 'text-[#121212] hover:bg-neutral-100'
+    }`;
 
   // Search filter
   const searchResults = searchQuery.trim()
@@ -275,20 +295,82 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* City and Authority Quick Filters */}
         <div className="flex flex-wrap items-center gap-2">
-          {/* City Selector */}
-          <select
-            value={selectedCity}
-            onChange={(e) => onSelectCity(e.target.value)}
-            aria-label="Şehir Seçimi"
-            className="bg-white rounded-xl border border-neutral-300 text-[#121212] text-xs px-2 py-1 font-mono font-bold focus:outline-none focus:border-[#121212] max-w-[180px] truncate"
-          >
-            <option value="ALL">🇹🇷 Tüm Türkiye (81 İl)</option>
-            {TURKEY_PROVINCES.map((prov) => (
-              <option key={prov.code} value={prov.name}>
-                {prov.code} - {prov.name} {prov.isMetropolitan ? '★' : ''}
-              </option>
-            ))}
-          </select>
+          {/* City Selector — custom compact searchable dropdown */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsCityOpen((v) => !v)}
+              aria-label="Şehir Seçimi"
+              className="flex items-center gap-1.5 bg-white rounded-xl border border-neutral-300 text-[#121212] text-xs px-3 py-1 font-semibold hover:border-[#121212] transition max-w-[190px]"
+            >
+              <Globe className="w-3.5 h-3.5 text-[#1D4ED8] shrink-0" />
+              <span className="truncate">
+                {selectedCity === 'ALL' ? 'Tüm Türkiye' : selectedCity}
+              </span>
+              <ChevronDown
+                className={`w-3.5 h-3.5 text-neutral-400 shrink-0 transition-transform ${isCityOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+
+            {isCityOpen && (
+              <>
+                {/* click-away layer */}
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => {
+                    setIsCityOpen(false);
+                    setCitySearch('');
+                  }}
+                />
+                <div className="absolute z-50 mt-1.5 left-0 w-64 bg-white rounded-2xl border border-neutral-200 shadow-2xl overflow-hidden sk-pop-in">
+                  {/* Search box */}
+                  <div className="p-2 border-b border-neutral-100">
+                    <div className="relative flex items-center">
+                      <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-2.5 pointer-events-none" />
+                      <input
+                        autoFocus
+                        value={citySearch}
+                        onChange={(e) => setCitySearch(e.target.value)}
+                        placeholder="İl ara..."
+                        className="w-full bg-[#F8F9FA] rounded-lg border border-neutral-200 pl-8 pr-2 py-1.5 text-xs text-[#121212] placeholder-neutral-400 focus:outline-none focus:border-[#121212] focus:bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Scrollable list */}
+                  <div className="max-h-60 overflow-y-auto py-1">
+                    {showAllOption && (
+                      <button onClick={() => selectCity('ALL')} className={cityItemClass('ALL')}>
+                        <span className="flex items-center gap-2">
+                          <span>🇹🇷</span>
+                          <span>Tüm Türkiye</span>
+                          <span className="text-neutral-400 text-[10px]">81 İl</span>
+                        </span>
+                        {selectedCity === 'ALL' && <Check className="w-3.5 h-3.5 text-[#1D4ED8]" />}
+                      </button>
+                    )}
+                    {filteredProvinces.map((prov) => (
+                      <button
+                        key={prov.code}
+                        onClick={() => selectCity(prov.name)}
+                        className={cityItemClass(prov.name)}
+                      >
+                        <span className="flex items-center gap-2">
+                          <span className="text-neutral-400 text-[10px] w-5 shrink-0">{prov.code}</span>
+                          <span>{prov.name}</span>
+                          {prov.isMetropolitan && <span className="text-amber-500 text-[10px]">★</span>}
+                        </span>
+                        {selectedCity === prov.name && <Check className="w-3.5 h-3.5 text-[#1D4ED8]" />}
+                      </button>
+                    ))}
+                    {!showAllOption && filteredProvinces.length === 0 && (
+                      <div className="px-3 py-3 text-xs text-neutral-400 text-center">Sonuç bulunamadı</div>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
 
           {/* Authority Type Filter Badges */}
           <div className="flex flex-wrap items-center gap-1">
