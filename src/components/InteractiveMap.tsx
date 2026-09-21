@@ -56,6 +56,7 @@ interface InteractiveMapProps {
   onAddStreets?: (newStreets: StreetSegment[]) => void;
   selectedCity?: string;
   onSelectCity?: (city: string) => void;
+  theme?: 'light' | 'dark';
 }
 
 export const InteractiveMap: React.FC<InteractiveMapProps> = ({
@@ -79,6 +80,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   onAddStreets,
   selectedCity = 'ALL',
   onSelectCity,
+  theme = 'light',
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -94,7 +96,11 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   const tileLayerRef = useRef<L.TileLayer | null>(null);
 
   // States
-  const [mapStyle, setMapStyle] = useState<'light' | 'osm' | 'dark'>('light');
+  const [mapStyle, setMapStyle] = useState<'light' | 'osm' | 'dark'>(theme === 'dark' ? 'dark' : 'light');
+  // Keep the basemap in sync with the app day/night theme
+  useEffect(() => {
+    setMapStyle(theme === 'dark' ? 'dark' : 'light');
+  }, [theme]);
   const [selectedUtilityCategory, setSelectedUtilityCategory] = useState<UtilityWorkCategory | 'ALL'>('ALL');
   const [roadTypeFilter, setRoadTypeFilter] = useState<RoadType | 'ALL'>('ALL');
   const [isLegendOpen, setIsLegendOpen] = useState<boolean>(false);

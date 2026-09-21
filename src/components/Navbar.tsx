@@ -15,7 +15,9 @@ import {
   Wrench,
   Globe,
   ChevronDown,
-  Check
+  Check,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { AuthorityType, StreetSegment, ViewTab } from '../types';
 import { AUTHORITIES_META } from '../data/mockData';
@@ -36,6 +38,8 @@ interface NavbarProps {
   onToggleMultiSelectMode: () => void;
   multiSelectedCount: number;
   utilityWorksCount?: number;
+  theme: 'light' | 'dark';
+  onToggleTheme: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -53,6 +57,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleMultiSelectMode,
   multiSelectedCount,
   utilityWorksCount = 0,
+  theme,
+  onToggleTheme,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -91,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="bg-white border-b border-neutral-300 shrink-0 sticky top-0 z-30 shadow-xs">
       {/* Top Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-5 py-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div className="w-full px-4 sm:px-6 py-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         {/* Brand and Tag */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => onSelectTab('harita')}>
@@ -113,15 +119,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {/* Mobile GPS quick button */}
-          <button
-            onClick={onUseGps}
-            disabled={isGpsLoading}
-            className="md:hidden flex items-center gap-1 bg-white hover:bg-neutral-100 text-[#121212] px-2.5 py-1.5 text-xs font-mono rounded-xl border border-neutral-300"
-          >
-            <Navigation className={`w-3.5 h-3.5 text-[#1D4ED8] ${isGpsLoading ? 'animate-spin' : ''}`} />
-            <span>GPS</span>
-          </button>
+          {/* Mobile quick actions */}
+          <div className="md:hidden flex items-center gap-1.5">
+            <button
+              onClick={onToggleTheme}
+              title="Gece / Gündüz modu"
+              aria-label="Gece / Gündüz modu"
+              className="flex items-center justify-center w-9 h-9 bg-white hover:bg-neutral-100 border border-neutral-300 rounded-xl transition"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-[#1D4ED8]" />}
+            </button>
+            <button
+              onClick={onUseGps}
+              disabled={isGpsLoading}
+              className="flex items-center gap-1 bg-white hover:bg-neutral-100 text-[#121212] px-2.5 py-1.5 text-xs rounded-xl border border-neutral-300"
+            >
+              <Navigation className={`w-3.5 h-3.5 text-[#1D4ED8] ${isGpsLoading ? 'animate-spin' : ''}`} />
+              <span>GPS</span>
+            </button>
+          </div>
         </div>
 
         {/* Search Bar with Autocomplete Dropdown */}
@@ -187,6 +203,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* GPS Button + Multi-Street Mode Toggle */}
         <div className="hidden md:flex items-center gap-2">
           <button
+            onClick={onToggleTheme}
+            title="Gece / Gündüz modu"
+            aria-label="Gece / Gündüz modu"
+            className="flex items-center justify-center w-9 h-9 bg-white hover:bg-neutral-100 border border-neutral-300 rounded-xl transition shadow-xs shrink-0"
+          >
+            {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-[#1D4ED8]" />}
+          </button>
+          <button
             onClick={onUseGps}
             disabled={isGpsLoading}
             className="flex items-center gap-1.5 bg-white hover:bg-neutral-100 text-[#121212] px-3 py-1.5 text-xs font-mono font-semibold rounded-xl border border-neutral-300 transition shadow-xs"
@@ -212,7 +236,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Secondary Row: Tabs & Authority Filter Filters */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-5 py-1.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 border-t border-neutral-200 bg-[#FAFAFA]">
+      <div className="w-full px-4 sm:px-6 py-1.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 border-t border-neutral-200 bg-[#FAFAFA]">
         {/* Navigation Tabs */}
         <nav className="flex flex-wrap items-center gap-1.5">
           <button

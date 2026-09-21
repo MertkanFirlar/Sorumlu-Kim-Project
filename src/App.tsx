@@ -96,6 +96,22 @@ export default function App() {
   const [correctionModalStreet, setCorrectionModalStreet] = useState<StreetSegment | null>(null);
   const [selectedUtilityWorkModal, setSelectedUtilityWorkModal] = useState<PublicUtilityWork | null>(null);
 
+  // Theme (day / night) with persistence
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    try {
+      return (localStorage.getItem('sorumlu_kim_theme') as 'light' | 'dark') || 'light';
+    } catch {
+      return 'light';
+    }
+  });
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('dark', theme === 'dark');
+    try {
+      localStorage.setItem('sorumlu_kim_theme', theme);
+    } catch {}
+  }, [theme]);
+
   // Save to LocalStorage
   useEffect(() => {
     try {
@@ -281,6 +297,8 @@ export default function App() {
         onToggleMultiSelectMode={() => setIsMultiSelectMode(!isMultiSelectMode)}
         multiSelectedCount={multiSelectedStreets.length}
         utilityWorksCount={utilityWorks.length}
+        theme={theme}
+        onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
       />
 
       {/* Main Viewport Container */}
@@ -307,6 +325,7 @@ export default function App() {
                 onAddStreets={handleAddStreets}
                 selectedCity={selectedCity}
                 onSelectCity={setSelectedCity}
+                theme={theme}
               />
             </div>
 

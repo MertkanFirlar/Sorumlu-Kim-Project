@@ -146,6 +146,74 @@
 .sk-fade-in { animation: sk-fade-in 240ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 .sk-pop-in  { animation: sk-pop-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 
+/* ===== Night mode palette (calm slate) ===== */
+.dark {
+  color-scheme: dark;
+}
+.dark body {
+  background-color: #0E1116;
+  color: #E7E9EE;
+}
+
+/* Surfaces */
+.dark .bg-white { background-color: #171A21 !important; }
+.dark .bg-\[\#F8F9FA\] { background-color: #0E1116 !important; }
+.dark .bg-\[\#FAFAFA\] { background-color: #12151B !important; }
+.dark .bg-\[\#E9ECEF\] { background-color: #0E1116 !important; }
+.dark .bg-\[\#121212\] { background-color: #262B35 !important; }
+.dark .bg-neutral-100 { background-color: #21262F !important; }
+.dark .bg-neutral-50 { background-color: #1B1F27 !important; }
+.dark .hover\:bg-neutral-100:hover { background-color: #262C36 !important; }
+.dark .hover\:bg-neutral-50:hover { background-color: #1F242D !important; }
+
+/* Soft tinted backgrounds */
+.dark .bg-blue-50 { background-color: rgba(59, 130, 246, 0.16) !important; }
+.dark .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.16) !important; }
+.dark .bg-orange-50 { background-color: rgba(249, 115, 22, 0.16) !important; }
+.dark .bg-purple-50 { background-color: rgba(168, 85, 247, 0.16) !important; }
+.dark .bg-red-50 { background-color: rgba(239, 68, 68, 0.16) !important; }
+
+/* Text */
+.dark .text-\[\#121212\] { color: #E7E9EE !important; }
+.dark .text-neutral-900, .dark .text-neutral-800 { color: #DADDE3 !important; }
+.dark .text-neutral-700 { color: #C3C7CF !important; }
+.dark .text-neutral-600 { color: #A2A8B3 !important; }
+.dark .text-neutral-500 { color: #8A909B !important; }
+.dark .text-neutral-400 { color: #6E7480 !important; }
+
+/* Accent text (lightened for contrast on dark) */
+.dark .text-\[\#1D4ED8\] { color: #60A5FA !important; }
+.dark .text-\[\#047857\] { color: #34D399 !important; }
+.dark .text-\[\#C2410C\] { color: #FB923C !important; }
+.dark .text-\[\#6B21A8\] { color: #C084FC !important; }
+.dark .text-\[\#0284C7\] { color: #38BDF8 !important; }
+
+/* Borders */
+.dark .border-neutral-300 { border-color: #2A2F3A !important; }
+.dark .border-neutral-200 { border-color: #232830 !important; }
+.dark .border-neutral-100 { border-color: #1E232B !important; }
+
+/* Placeholders */
+.dark .placeholder-neutral-400::placeholder { color: #6E7480 !important; }
+
+/* Leaflet controls in dark */
+.dark .leaflet-control-zoom-in,
+.dark .leaflet-control-zoom-out {
+  background-color: #171A21 !important;
+  color: #E7E9EE !important;
+  border-bottom-color: #2A2F3A !important;
+}
+.dark .leaflet-control-zoom-in:hover,
+.dark .leaflet-control-zoom-out:hover {
+  background-color: #21262F !important;
+}
+.dark .leaflet-popup-content-wrapper,
+.dark .leaflet-popup-tip {
+  background: #171A21 !important;
+  color: #E7E9EE !important;
+  border-color: #2A2F3A !important;
+}
+
 /* Print styling for formal Turkish petitions */
 @media print {
   body * {
