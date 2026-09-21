@@ -29,7 +29,6 @@ import { StatisticsDashboard } from './components/StatisticsDashboard';
 import { CorrectionModal } from './components/CorrectionModal';
 import { UtilityWorksView } from './components/UtilityWorksView';
 import { UtilityWorkDetailModal } from './components/UtilityWorkDetailModal';
-import { AdSlot } from './components/AdSlot';
 import { 
   Building2, 
   Layers, 
@@ -449,15 +448,6 @@ export default function App() {
           </div>
         )}
       </main>
-
-      {/* Non-intrusive ad banner — hidden on the full-screen map tab; dormant until AdSense id is set */}
-      {currentTab !== 'harita' && (
-        <div className="w-full px-4 sm:px-6 py-2 bg-[#F8F9FA] border-t border-neutral-200 shrink-0">
-          <div className="max-w-5xl mx-auto">
-            <AdSlot />
-          </div>
-        </div>
-      )}
 
       {/* Clean Minimalist Footer */}
       <footer className="h-8 bg-[#121212] text-neutral-400 flex items-center px-4 sm:px-6 justify-between text-[10px] font-mono uppercase tracking-widest shrink-0">
