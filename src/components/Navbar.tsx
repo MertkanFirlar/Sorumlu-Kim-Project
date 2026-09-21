@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Search, 
   Navigation, 
@@ -17,11 +17,13 @@ import {
   ChevronDown,
   Check,
   Sun,
-  Moon
+  Moon,
+  MapPin,
+  Loader2
 } from 'lucide-react';
 import { AuthorityType, StreetSegment, ViewTab } from '../types';
 import { AUTHORITIES_META } from '../data/mockData';
-import { TURKEY_PROVINCES } from '../services/roadService';
+import { TURKEY_PROVINCES, geocodeSearch, GeoPlace } from '../services/roadService';
 
 interface NavbarProps {
   currentTab: ViewTab;
@@ -40,6 +42,7 @@ interface NavbarProps {
   utilityWorksCount?: number;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
+  onSearchLocation: (lat: number, lng: number) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -59,6 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   utilityWorksCount = 0,
   theme,
   onToggleTheme,
+  onSearchLocation,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -93,6 +97,33 @@ export const Navbar: React.FC<NavbarProps> = ({
         );
       })
     : [];
+
+  // Real address search (Nominatim) — finds any street/place across Turkey
+  const [geoResults, setGeoResults] = useState<GeoPlace[]>([]);
+  const [geoSearching, setGeoSearching] = useState(false);
+  const geoDebounceRef = useRef<any>(null);
+  useEffect(() => {
+    if (geoDebounceRef.current) clearTimeout(geoDebounceRef.current);
+    if (searchQuery.trim().length < 3) {
+      setGeoResults([]);
+      setGeoSearching(false);
+      return;
+    }
+    setGeoSearching(true);
+    geoDebounceRef.current = setTimeout(async () => {
+      const places = await geocodeSearch(searchQuery);
+      setGeoResults(places);
+      setGeoSearching(false);
+    }, 450);
+    return () => geoDebounceRef.current && clearTimeout(geoDebounceRef.current);
+  }, [searchQuery]);
+
+  const handlePickPlace = (place: GeoPlace) => {
+    onSearchLocation(place.lat, place.lng);
+    setSearchQuery('');
+    setGeoResults([]);
+    setIsSearchFocused(false);
+  };
 
   return (
     <header className="bg-white border-b border-neutral-300 shrink-0 sticky top-0 z-30 shadow-xs">
@@ -164,38 +195,68 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Autocomplete Dropdown */}
-          {isSearchFocused && searchResults.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl border border-neutral-300 shadow-xl z-50 max-h-72 overflow-y-auto">
-              <div className="p-1.5 text-[10px] font-mono font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-200 px-3 bg-[#F8F9FA]">
-                Bulunan Güzergahlar ({searchResults.length})
-              </div>
-              {searchResults.map((street) => {
-                const meta = AUTHORITIES_META[street.authorityType];
-                return (
-                  <div
-                    key={street.id}
-                    onMouseDown={() => {
-                      onSelectStreet(street);
-                      onSelectTab('harita');
-                      setSearchQuery('');
-                    }}
-                    className="px-3 py-2 hover:bg-neutral-100 cursor-pointer border-b border-neutral-200 last:border-0 flex items-center justify-between gap-2"
-                  >
-                    <div>
-                      <div className="font-bold text-xs text-[#121212]">{street.name}</div>
-                      <div className="text-[11px] text-neutral-500">
-                        {street.neighborhood} • {street.district}, {street.city}
-                      </div>
-                    </div>
-                    <span
-                      className="px-2 py-0.5 text-[10px] font-mono font-bold whitespace-nowrap text-white"
-                      style={{ backgroundColor: meta.color }}
-                    >
-                      {meta.shortName}
-                    </span>
+          {isSearchFocused && searchQuery.trim().length >= 2 && (
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl border border-neutral-300 shadow-xl z-50 max-h-80 overflow-y-auto">
+              {/* Registered roads already in the app */}
+              {searchResults.length > 0 && (
+                <>
+                  <div className="p-1.5 text-[10px] font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-200 px-3 bg-[#F8F9FA]">
+                    Kayıtlı Yollar ({searchResults.length})
                   </div>
-                );
-              })}
+                  {searchResults.map((street) => {
+                    const meta = AUTHORITIES_META[street.authorityType];
+                    return (
+                      <div
+                        key={street.id}
+                        onMouseDown={() => {
+                          onSelectStreet(street);
+                          onSelectTab('harita');
+                          setSearchQuery('');
+                        }}
+                        className="px-3 py-2 hover:bg-neutral-100 cursor-pointer border-b border-neutral-200 last:border-0 flex items-center justify-between gap-2"
+                      >
+                        <div>
+                          <div className="font-bold text-xs text-[#121212]">{street.name}</div>
+                          <div className="text-[11px] text-neutral-500">
+                            {street.neighborhood} • {street.district}, {street.city}
+                          </div>
+                        </div>
+                        <span
+                          className="px-2 py-0.5 text-[10px] font-bold whitespace-nowrap text-white rounded-md"
+                          style={{ backgroundColor: meta.color }}
+                        >
+                          {meta.shortName}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
+
+              {/* Real places from the map (geocoding) */}
+              <div className="p-1.5 text-[10px] font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-200 px-3 bg-[#F8F9FA] flex items-center gap-1.5">
+                <MapPin className="w-3 h-3" />
+                Haritada Ara
+                {geoSearching && <Loader2 className="w-3 h-3 animate-spin ml-auto" />}
+              </div>
+              {geoResults.map((place, i) => (
+                <div
+                  key={`${place.lat}-${place.lng}-${i}`}
+                  onMouseDown={() => handlePickPlace(place)}
+                  className="px-3 py-2 hover:bg-neutral-100 cursor-pointer border-b border-neutral-200 last:border-0 flex items-start gap-2"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-[#1D4ED8] mt-0.5 shrink-0" />
+                  <div className="min-w-0">
+                    <div className="font-semibold text-xs text-[#121212] truncate">{place.shortLabel}</div>
+                    <div className="text-[11px] text-neutral-500 truncate">{place.label}</div>
+                  </div>
+                </div>
+              ))}
+              {!geoSearching && geoResults.length === 0 && searchResults.length === 0 && (
+                <div className="px-3 py-3 text-[11px] text-neutral-400 text-center">
+                  {searchQuery.trim().length < 3 ? 'Aramak için en az 3 harf yaz…' : 'Sonuç bulunamadı.'}
+                </div>
+              )}
             </div>
           )}
         </div>

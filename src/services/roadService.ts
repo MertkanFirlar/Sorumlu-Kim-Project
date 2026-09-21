@@ -319,6 +319,44 @@ export async function fetchLiveRoadsFromOverpass(
   }
 }
 
+// A geocoded place suggestion (address / street / district / city)
+export interface GeoPlace {
+  label: string;
+  shortLabel: string;
+  lat: number;
+  lng: number;
+  type?: string;
+}
+
+// Forward geocoding via Nominatim — turns free text into real locations across Turkey
+export async function geocodeSearch(query: string): Promise<GeoPlace[]> {
+  const q = query.trim();
+  if (q.length < 3) return [];
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&countrycodes=tr&addressdetails=1&limit=6&accept-language=tr&q=${encodeURIComponent(q)}`;
+    const res = await fetch(url, { headers: { Accept: 'application/json' } });
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (!Array.isArray(data)) return [];
+    return data.map((d: any): GeoPlace => {
+      const a = d.address || {};
+      const primary =
+        a.road || a.pedestrian || a.neighbourhood || a.suburb || a.town || a.city || a.village || a.county || d.name || '';
+      const region = a.city || a.town || a.province || a.state || a.county || '';
+      const shortLabel = [primary, region].filter(Boolean).join(', ') || (d.display_name || '').split(',').slice(0, 2).join(',');
+      return {
+        label: d.display_name as string,
+        shortLabel,
+        lat: parseFloat(d.lat),
+        lng: parseFloat(d.lon),
+        type: d.type,
+      };
+    });
+  } catch {
+    return [];
+  }
+}
+
 // Single coordinate reverse lookup & road geometry builder
 export async function fetchRoadAtLocation(lat: number, lng: number): Promise<StreetSegment | null> {
   const coordKey = `${lat.toFixed(4)},${lng.toFixed(4)}`;

@@ -29,6 +29,8 @@ import { StatisticsDashboard } from './components/StatisticsDashboard';
 import { CorrectionModal } from './components/CorrectionModal';
 import { UtilityWorksView } from './components/UtilityWorksView';
 import { UtilityWorkDetailModal } from './components/UtilityWorkDetailModal';
+import { Onboarding } from './components/Onboarding';
+import { fetchRoadAtLocation } from './services/roadService';
 import { 
   Building2, 
   Layers, 
@@ -111,6 +113,36 @@ export default function App() {
       localStorage.setItem('sorumlu_kim_theme', theme);
     } catch {}
   }, [theme]);
+
+  // Externally requested map focus (search / onboarding / GPS)
+  const [focusLocation, setFocusLocation] = useState<[number, number] | null>(null);
+
+  // First-visit onboarding (ask for location or address)
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(() => {
+    try {
+      return !localStorage.getItem('sorumlu_kim_onboarded');
+    } catch {
+      return true;
+    }
+  });
+  const dismissOnboarding = () => {
+    setShowOnboarding(false);
+    try {
+      localStorage.setItem('sorumlu_kim_onboarded', '1');
+    } catch {}
+  };
+
+  // Center the map on a real location and snap to the road there
+  const handleFocusLocation = async (lat: number, lng: number) => {
+    setCurrentTab('harita');
+    setFocusLocation([lat, lng]);
+    setCustomPinPos([lat, lng]);
+    const street = await fetchRoadAtLocation(lat, lng);
+    if (street) {
+      handleAddStreets([street]);
+      setSelectedStreet(street);
+    }
+  };
 
   // Save to LocalStorage
   useEffect(() => {
@@ -299,6 +331,7 @@ export default function App() {
         utilityWorksCount={utilityWorks.length}
         theme={theme}
         onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+        onSearchLocation={handleFocusLocation}
       />
 
       {/* Main Viewport Container */}
@@ -326,6 +359,7 @@ export default function App() {
                 selectedCity={selectedCity}
                 onSelectCity={setSelectedCity}
                 theme={theme}
+                focusLocation={focusLocation}
               />
             </div>
 
@@ -477,6 +511,22 @@ export default function App() {
             handleSelectStreetAndOpenMap(streetId);
             setSelectedUtilityWorkModal(null);
           }}
+        />
+      )}
+
+      {/* First-visit onboarding: use my location or type an address */}
+      {showOnboarding && (
+        <Onboarding
+          isGpsLoading={isGpsLoading}
+          onUseGps={() => {
+            handleUseGps();
+            dismissOnboarding();
+          }}
+          onSearchLocation={(lat, lng) => {
+            handleFocusLocation(lat, lng);
+            dismissOnboarding();
+          }}
+          onClose={dismissOnboarding}
         />
       )}
     </div>

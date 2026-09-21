@@ -57,6 +57,7 @@ interface InteractiveMapProps {
   selectedCity?: string;
   onSelectCity?: (city: string) => void;
   theme?: 'light' | 'dark';
+  focusLocation?: [number, number] | null;
 }
 
 export const InteractiveMap: React.FC<InteractiveMapProps> = ({
@@ -81,6 +82,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   selectedCity = 'ALL',
   onSelectCity,
   theme = 'light',
+  focusLocation,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -451,6 +453,13 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       customPinMarkerRef.current = null;
     }
   }, [customPinPos, findNearestStreet, onPinLocationChange, onSelectStreet, onSetCustomPinPos, onAddStreets]);
+
+  // Fly to an externally-requested location (search / onboarding / GPS)
+  useEffect(() => {
+    if (focusLocation && mapInstanceRef.current) {
+      mapInstanceRef.current.flyTo(focusLocation, 16, { duration: 1.2 });
+    }
+  }, [focusLocation]);
 
   // Pan to selected street
   useEffect(() => {
