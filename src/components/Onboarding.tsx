@@ -5,7 +5,7 @@ import { geocodeSearch, GeoPlace } from '../services/roadService';
 interface OnboardingProps {
   isGpsLoading: boolean;
   onUseGps: () => void;
-  onSearchLocation: (lat: number, lng: number) => void;
+  onSearchLocation: (place: GeoPlace) => void;
   onClose: () => void;
 }
 
@@ -105,13 +105,18 @@ export const Onboarding: React.FC<OnboardingProps> = ({
                 {results.map((place, i) => (
                   <button
                     key={`${place.lat}-${place.lng}-${i}`}
-                    onClick={() => onSearchLocation(place.lat, place.lng)}
+                    onClick={() => onSearchLocation(place)}
                     className="w-full flex items-start gap-2.5 px-3 py-2.5 text-left hover:bg-neutral-100 transition"
                   >
-                    <MapPin className="w-4 h-4 text-[#1D4ED8] mt-0.5 shrink-0" />
-                    <span className="min-w-0">
-                      <span className="block text-xs font-semibold truncate">{place.shortLabel}</span>
-                      <span className="block text-[11px] text-neutral-500 truncate">{place.label}</span>
+                    <MapPin className={`w-4 h-4 mt-0.5 shrink-0 ${place.isRoad ? 'text-[#1D4ED8]' : 'text-neutral-400'}`} />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-xs font-semibold truncate">
+                        {place.title}
+                        {place.isRoad && (
+                          <span className="ml-1.5 text-[9px] font-bold text-[#1D4ED8] bg-blue-50 px-1 py-0.5 rounded">YOL</span>
+                        )}
+                      </span>
+                      <span className="block text-[11px] text-neutral-500 truncate">{place.subtitle}</span>
                     </span>
                   </button>
                 ))}

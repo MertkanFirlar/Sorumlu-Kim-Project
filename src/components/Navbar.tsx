@@ -42,7 +42,7 @@ interface NavbarProps {
   utilityWorksCount?: number;
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
-  onSearchLocation: (lat: number, lng: number) => void;
+  onSearchLocation: (place: GeoPlace) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -119,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, [searchQuery]);
 
   const handlePickPlace = (place: GeoPlace) => {
-    onSearchLocation(place.lat, place.lng);
+    onSearchLocation(place);
     setSearchQuery('');
     setGeoResults([]);
     setIsSearchFocused(false);
@@ -245,10 +245,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onMouseDown={() => handlePickPlace(place)}
                   className="px-3 py-2 hover:bg-neutral-100 cursor-pointer border-b border-neutral-200 last:border-0 flex items-start gap-2"
                 >
-                  <MapPin className="w-3.5 h-3.5 text-[#1D4ED8] mt-0.5 shrink-0" />
-                  <div className="min-w-0">
-                    <div className="font-semibold text-xs text-[#121212] truncate">{place.shortLabel}</div>
-                    <div className="text-[11px] text-neutral-500 truncate">{place.label}</div>
+                  <MapPin className={`w-3.5 h-3.5 mt-0.5 shrink-0 ${place.isRoad ? 'text-[#1D4ED8]' : 'text-neutral-400'}`} />
+                  <div className="min-w-0 flex-1">
+                    <div className="font-semibold text-xs text-[#121212] truncate">
+                      {place.title}
+                      {place.isRoad && (
+                        <span className="ml-1.5 text-[9px] font-bold text-[#1D4ED8] bg-blue-50 px-1 py-0.5 rounded">YOL</span>
+                      )}
+                    </div>
+                    <div className="text-[11px] text-neutral-500 truncate">{place.subtitle}</div>
                   </div>
                 </div>
               ))}

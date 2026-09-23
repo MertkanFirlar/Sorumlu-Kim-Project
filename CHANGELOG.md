@@ -4,6 +4,13 @@ Sorumlu Kim? projesinde **gün gün** ne yaptığımızın kaydı. En yeni en ü
 
 ---
 
+## 24.09.2026
+
+- Cadde/sokak araması iyileştirildi: aramada **yollar öne çıkarılıyor** (cadde/sokak yazınca alakasız mahalleler değil yollar önce)
+- Sonuçlar daha net: **cadde adı + mahalle, ilçe, il** ayrı satırda; yol olanlar "YOL" etiketiyle işaretli
+- Bir yol seçilince artık **gerçek yol geometrisi** OpenStreetMap'ten çekiliyor (sahte parça yerine), sorumlu kurum daha doğru sınıflandırılıyor
+- Arama başarısız olursa konuma göre yedek çözüm devrede
+
 ## 21.09.2026
 
 - Harita tam sayfa yapıldı (footer üstündeki boş gri alan kaldırıldı)

@@ -30,7 +30,7 @@ import { CorrectionModal } from './components/CorrectionModal';
 import { UtilityWorksView } from './components/UtilityWorksView';
 import { UtilityWorkDetailModal } from './components/UtilityWorkDetailModal';
 import { Onboarding } from './components/Onboarding';
-import { fetchRoadAtLocation } from './services/roadService';
+import { fetchRoadAtLocation, fetchRoadByOsmWay, GeoPlace } from './services/roadService';
 import { 
   Building2, 
   Layers, 
@@ -133,11 +133,16 @@ export default function App() {
   };
 
   // Center the map on a real location and snap to the road there
-  const handleFocusLocation = async (lat: number, lng: number) => {
+  const handleFocusLocation = async (place: GeoPlace) => {
     setCurrentTab('harita');
-    setFocusLocation([lat, lng]);
-    setCustomPinPos([lat, lng]);
-    const street = await fetchRoadAtLocation(lat, lng);
+    setFocusLocation([place.lat, place.lng]);
+    setCustomPinPos([place.lat, place.lng]);
+    let street: StreetSegment | null = null;
+    // For actual streets, pull the real OSM geometry + proper authority classification
+    if (place.isRoad && place.osmType === 'way' && place.osmId) {
+      street = await fetchRoadByOsmWay(place.osmId, place.province || 'Türkiye');
+    }
+    if (!street) street = await fetchRoadAtLocation(place.lat, place.lng);
     if (street) {
       handleAddStreets([street]);
       setSelectedStreet(street);
@@ -522,8 +527,8 @@ export default function App() {
             handleUseGps();
             dismissOnboarding();
           }}
-          onSearchLocation={(lat, lng) => {
-            handleFocusLocation(lat, lng);
+          onSearchLocation={(place) => {
+            handleFocusLocation(place);
             dismissOnboarding();
           }}
           onClose={dismissOnboarding}
