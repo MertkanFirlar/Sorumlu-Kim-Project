@@ -6,6 +6,8 @@ Sorumlu Kim? projesinde **gün gün** ne yaptığımızın kaydı. En yeni en ü
 
 ## 24.09.2026
 
+- 📝 **Dilekçe akışı adım-adım sihirbaza çevrildi**: 1) Bilgileriniz → 2) Şikayet → 3) Önizle & İndir; adım göstergeli, alanlar netleştirildi, örnek/sahte veri kaldırıldı (placeholder + doğrulama)
+- 🔗 **Paylaş / kopyala eklendi**: yol panelinden "kim sorumlu" bilgisini tek tuşla paylaş (mobilde native paylaşım, masaüstünde panoya kopyalar)
 - Cadde/sokak araması iyileştirildi: aramada **yollar öne çıkarılıyor** (cadde/sokak yazınca alakasız mahalleler değil yollar önce)
 - Sonuçlar daha net: **cadde adı + mahalle, ilçe, il** ayrı satırda; yol olanlar "YOL" etiketiyle işaretli
 - Bir yol seçilince artık **gerçek yol geometrisi** OpenStreetMap'ten çekiliyor (sahte parça yerine), sorumlu kurum daha doğru sınıflandırılıyor

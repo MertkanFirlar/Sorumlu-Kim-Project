@@ -1,7 +1,9 @@
-import React from 'react';
-import { 
-  Building2, 
-  AlertTriangle, 
+import React, { useState } from 'react';
+import {
+  Share2,
+  Check,
+  Building2,
+  AlertTriangle,
   FileText, 
   MessageSquare, 
   CheckCircle2, 
@@ -53,6 +55,23 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
   const streetComplaints = complaints.filter((c) => c.streetId === street.id);
   const streetUtilityWorks = utilityWorks.filter((w) => w.streetId === street.id);
 
+  const [shared, setShared] = useState(false);
+  const handleShare = async () => {
+    const authority = street.authorityCustomName || meta.fullNamePrefix;
+    const text = `${street.name} (${street.district}, ${street.city}) yolunun bakım/onarım sorumlusu:\n${authority}\n\nSorumlu Kim? ile öğren: ${window.location.href}`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: 'Sorumlu Kim?', text });
+      } else {
+        await navigator.clipboard.writeText(text);
+      }
+      setShared(true);
+      setTimeout(() => setShared(false), 2500);
+    } catch {
+      /* kullanıcı vazgeçti / desteklenmiyor */
+    }
+  };
+
   return (
     <div className="bg-white rounded-xl border border-neutral-300 shadow-sm flex flex-col max-h-[85vh] lg:max-h-[calc(100vh-140px)] overflow-hidden text-[#121212]">
       {/* Header Banner with Authority Color Indicator */}
@@ -86,13 +105,22 @@ export const StreetDetailPanel: React.FC<StreetDetailPanelProps> = ({
           </p>
         </div>
 
-        <button
-          onClick={onClose}
-          className="p-1 text-neutral-400 hover:text-black hover:bg-neutral-100 transition"
-          title="Kapat"
-        >
-          <X className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-1 shrink-0">
+          <button
+            onClick={handleShare}
+            className={`p-1.5 rounded-lg transition ${shared ? 'text-[#047857] bg-emerald-50' : 'text-neutral-400 hover:text-[#1D4ED8] hover:bg-neutral-100'}`}
+            title="Sorumluyu paylaş"
+          >
+            {shared ? <Check className="w-5 h-5" /> : <Share2 className="w-5 h-5" />}
+          </button>
+          <button
+            onClick={onClose}
+            className="p-1 text-neutral-400 hover:text-black hover:bg-neutral-100 rounded-lg transition"
+            title="Kapat"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
       {/* Body Content - Scrollable */}
