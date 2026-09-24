@@ -30,6 +30,7 @@ import { CorrectionModal } from './components/CorrectionModal';
 import { UtilityWorksView } from './components/UtilityWorksView';
 import { UtilityWorkDetailModal } from './components/UtilityWorkDetailModal';
 import { Onboarding } from './components/Onboarding';
+import { PrivacyModal } from './components/PrivacyModal';
 import { fetchRoadAtLocation, fetchRoadByOsmWay, GeoPlace } from './services/roadService';
 import { 
   Building2, 
@@ -125,6 +126,7 @@ export default function App() {
       return true;
     }
   });
+  const [showPrivacy, setShowPrivacy] = useState(false);
   const dismissOnboarding = () => {
     setShowOnboarding(false);
     try {
@@ -490,9 +492,19 @@ export default function App() {
 
       {/* Clean Minimalist Footer */}
       <footer className="h-8 bg-[#121212] text-neutral-400 flex items-center px-4 sm:px-6 justify-between text-[10px] font-mono uppercase tracking-widest shrink-0">
-        <span className="hidden sm:inline">Sistem Durumu: Çevrimiçi • AYKOME & SCADA Canlı Entegrasyonu</span>
-        <span className="text-center sm:text-left">Veri: T.C. Belediyeler & KGM Envanteri</span>
-        <span>2026 © Sorumlu Kim?</span>
+        <button
+          onClick={() => setShowPrivacy(true)}
+          className="hidden sm:inline hover:text-white transition normal-case"
+        >
+          🔒 Gizlilik & KVKK · Sizi takip etmiyoruz
+        </button>
+        <span className="hidden md:inline text-center">Veri: T.C. Belediyeler & KGM Envanteri</span>
+        <div className="flex items-center gap-3">
+          <button onClick={() => setShowPrivacy(true)} className="sm:hidden hover:text-white transition normal-case">
+            🔒 Gizlilik
+          </button>
+          <span>2026 © Sorumlu Kim?</span>
+        </div>
       </footer>
 
       {/* Authority Correction Community Modal */}
@@ -534,6 +546,9 @@ export default function App() {
           onClose={dismissOnboarding}
         />
       )}
+
+      {/* Privacy / KVKK */}
+      {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
     </div>
   );
 }

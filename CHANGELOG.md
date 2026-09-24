@@ -6,6 +6,7 @@ Sorumlu Kim? projesinde **gün gün** ne yaptığımızın kaydı. En yeni en ü
 
 ## 24.09.2026
 
+- 🔒 **Gizlilik & KVKK Aydınlatma Metni eklendi** (footer'dan açılan modal): "sunucumuz yok, veri toplamıyoruz, dilekçe bilgileri sadece cihazınızda" — kullanılan üçüncü taraf servisler (OSM/Esri/Google Fonts) ve localStorage dürüstçe açıklandı; footer'daki uydurma "AYKOME/SCADA" ibaresi kaldırıldı
 - 📝 **Dilekçe akışı adım-adım sihirbaza çevrildi**: 1) Bilgileriniz → 2) Şikayet → 3) Önizle & İndir; adım göstergeli, alanlar netleştirildi, örnek/sahte veri kaldırıldı (placeholder + doğrulama)
 - 🔗 **Paylaş / kopyala eklendi**: yol panelinden "kim sorumlu" bilgisini tek tuşla paylaş (mobilde native paylaşım, masaüstünde panoya kopyalar)
 - Cadde/sokak araması iyileştirildi: aramada **yollar öne çıkarılıyor** (cadde/sokak yazınca alakasız mahalleler değil yollar önce)
