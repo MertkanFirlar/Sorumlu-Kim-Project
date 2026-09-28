@@ -7,6 +7,7 @@ interface OnboardingProps {
   onUseGps: () => void;
   onSearchLocation: (place: GeoPlace) => void;
   onClose: () => void;
+  onHowItWorks: () => void;
 }
 
 export const Onboarding: React.FC<OnboardingProps> = ({
@@ -14,6 +15,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({
   onUseGps,
   onSearchLocation,
   onClose,
+  onHowItWorks,
 }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<GeoPlace[]>([]);
@@ -128,12 +130,20 @@ export const Onboarding: React.FC<OnboardingProps> = ({
             )}
           </div>
 
-          <button
-            onClick={onClose}
-            className="w-full text-center text-xs text-neutral-500 hover:text-black py-1.5 transition"
-          >
-            Şimdilik geç, haritayı keşfet
-          </button>
+          <div className="flex items-center justify-between pt-0.5">
+            <button
+              onClick={onHowItWorks}
+              className="text-xs text-[#1D4ED8] hover:underline font-semibold"
+            >
+              Nasıl çalışır?
+            </button>
+            <button
+              onClick={onClose}
+              className="text-xs text-neutral-500 hover:text-black transition"
+            >
+              Şimdilik geç →
+            </button>
+          </div>
         </div>
       </div>
     </div>

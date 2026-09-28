@@ -4,6 +4,10 @@ Sorumlu Kim? projesinde **gün gün** ne yaptığımızın kaydı. En yeni en ü
 
 ---
 
+## 28.09.2026
+
+- ❓ **"Nasıl Çalışır?" rehberi eklendi**: navbar'daki buton + karşılama ekranındaki linkten açılıyor; 3 adım (Yolu bul → Kim sorumlu öğren → Dilekçe oluştur) + örnek senaryo + "tahmini bilgi" dürüstlük notu
+
 ## 24.09.2026
 
 - 🔒 **Gizlilik & KVKK Aydınlatma Metni eklendi** (footer'dan açılan modal): "sunucumuz yok, veri toplamıyoruz, dilekçe bilgileri sadece cihazınızda" — kullanılan üçüncü taraf servisler (OSM/Esri/Google Fonts) ve localStorage dürüstçe açıklandı; footer'daki uydurma "AYKOME/SCADA" ibaresi kaldırıldı

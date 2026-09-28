@@ -31,6 +31,7 @@ import { UtilityWorksView } from './components/UtilityWorksView';
 import { UtilityWorkDetailModal } from './components/UtilityWorkDetailModal';
 import { Onboarding } from './components/Onboarding';
 import { PrivacyModal } from './components/PrivacyModal';
+import { HowItWorks } from './components/HowItWorks';
 import { fetchRoadAtLocation, fetchRoadByOsmWay, GeoPlace } from './services/roadService';
 import { 
   Building2, 
@@ -127,6 +128,7 @@ export default function App() {
     }
   });
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const dismissOnboarding = () => {
     setShowOnboarding(false);
     try {
@@ -339,6 +341,7 @@ export default function App() {
         theme={theme}
         onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
         onSearchLocation={handleFocusLocation}
+        onOpenHelp={() => setShowHelp(true)}
       />
 
       {/* Main Viewport Container */}
@@ -544,8 +547,12 @@ export default function App() {
             dismissOnboarding();
           }}
           onClose={dismissOnboarding}
+          onHowItWorks={() => setShowHelp(true)}
         />
       )}
+
+      {/* How it works tutorial */}
+      {showHelp && <HowItWorks onClose={() => setShowHelp(false)} />}
 
       {/* Privacy / KVKK */}
       {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}

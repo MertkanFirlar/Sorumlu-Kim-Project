@@ -19,7 +19,8 @@ import {
   Sun,
   Moon,
   MapPin,
-  Loader2
+  Loader2,
+  HelpCircle
 } from 'lucide-react';
 import { AuthorityType, StreetSegment, ViewTab } from '../types';
 import { AUTHORITIES_META } from '../data/mockData';
@@ -43,6 +44,7 @@ interface NavbarProps {
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
   onSearchLocation: (place: GeoPlace) => void;
+  onOpenHelp: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -63,6 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   theme,
   onToggleTheme,
   onSearchLocation,
+  onOpenHelp,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -152,6 +155,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Mobile quick actions */}
           <div className="md:hidden flex items-center gap-1.5">
+            <button
+              onClick={onOpenHelp}
+              title="Nasıl çalışır?"
+              aria-label="Nasıl çalışır?"
+              className="flex items-center justify-center w-9 h-9 bg-white hover:bg-neutral-100 border border-neutral-300 rounded-xl transition"
+            >
+              <HelpCircle className="w-4 h-4 text-[#1D4ED8]" />
+            </button>
             <button
               onClick={onToggleTheme}
               title="Gece / Gündüz modu"
@@ -268,6 +279,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* GPS Button + Multi-Street Mode Toggle */}
         <div className="hidden md:flex items-center gap-2">
+          <button
+            onClick={onOpenHelp}
+            title="Nasıl çalışır?"
+            className="flex items-center gap-1.5 bg-white hover:bg-neutral-100 text-[#121212] px-3 py-1.5 text-xs font-semibold rounded-xl border border-neutral-300 transition shadow-xs shrink-0"
+          >
+            <HelpCircle className="w-3.5 h-3.5 text-[#1D4ED8]" />
+            <span>Nasıl Çalışır</span>
+          </button>
           <button
             onClick={onToggleTheme}
             title="Gece / Gündüz modu"
