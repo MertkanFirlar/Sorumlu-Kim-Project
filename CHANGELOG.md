@@ -6,6 +6,7 @@ Sorumlu Kim? projesinde **gün gün** ne yaptığımızın kaydı. En yeni en ü
 
 ## 07.10.2026
 
+- 🧹 **Harita ilk açılışta tertemiz**: sorumluluk çizgileri artık açılışta görünmüyor; kullanıcı bir **kuruma / şehre / yola** dokununca (ya da çalışma / ısı haritası modunu açınca) ilgili çizgiler beliriyor. Boş haritada yönlendiren ince bir ipucu balonu eklendi
 - 📳 **Dokunsal geri bildirim (haptik) eklendi**: telefonda sekme değiştirince, haritada yol seçince hafif titreşim; dilekçe indir/kopyala, şikayet ekleme ve kurum düzeltmesinde "başarı" titreşimi (konfeti ile birlikte). Android Chrome destekler, iOS/masaüstü sessizce yok sayar
 - ♿ **Erişilebilirlik**: sistemde "hareketi azalt" açık olan kullanıcılarda tüm animasyon/geçiş/press efektleri ve haptik otomatik kapanıyor
 

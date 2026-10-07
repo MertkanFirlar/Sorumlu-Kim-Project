@@ -375,6 +375,21 @@ export default function App() {
               />
             </div>
 
+            {/* Temiz harita ipucu: hiçbir seçim yokken yol görünmez, kullanıcıyı yönlendir */}
+            {!selectedStreet &&
+              multiSelectedStreets.length === 0 &&
+              activeAuthorityFilter === 'ALL' &&
+              selectedCity === 'ALL' && (
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 pointer-events-none px-4 w-full flex justify-center">
+                  <div className="pointer-events-auto flex items-center gap-2 bg-white/90 dark:bg-[#171A21]/90 backdrop-blur border border-neutral-300 shadow-xs rounded-full px-3.5 py-2 max-w-[92%] sk-fade-in">
+                    <MapPin className="w-4 h-4 text-[#1D4ED8] shrink-0" />
+                    <span className="text-xs font-medium text-neutral-700 leading-snug">
+                      Haritada bir yola dokunun ya da üstten kurum / şehir seçin — sorumlu idare görünsün
+                    </span>
+                  </div>
+                </div>
+              )}
+
             {/* On-Demand Desktop Sliding/Overlay Side Panel (Opens when a street is clicked) */}
             {selectedStreet && (
               <div className="hidden lg:block absolute top-3 left-3 z-30 w-96 max-h-[calc(100%-24px)] shadow-2xl rounded-2xl border border-neutral-300 overflow-hidden bg-white animate-in slide-in-from-left fade-in duration-300">

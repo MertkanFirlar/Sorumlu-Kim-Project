@@ -489,6 +489,20 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
     markersGroupRef.current.clearLayers();
     heatmapGroupRef.current.clearLayers();
 
+    // İlk açılışta harita temiz kalsın: kullanıcı bir kurum/şehir/yol tipi
+    // seçmeden, bir mod (çalışma / ısı haritası) açmadan ya da bir yol
+    // seçmeden sorumluluk çizgilerini çizme. "Seçince o şık görünür."
+    const hasActiveSelection =
+      activeAuthorityFilter !== 'ALL' ||
+      roadTypeFilter !== 'ALL' ||
+      (!!selectedCity && selectedCity !== 'ALL') ||
+      showActiveWorkOnly ||
+      showHeatmapOnly ||
+      !!selectedStreet ||
+      multiSelectedStreets.length > 0;
+
+    if (!hasActiveSelection) return;
+
     // Filter streets by authority and road type
     const filtered = streets.filter((street) => {
       if (activeAuthorityFilter !== 'ALL' && street.authorityType !== activeAuthorityFilter) {
@@ -686,6 +700,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
     roadTypeFilter,
     showActiveWorkOnly,
     showHeatmapOnly,
+    selectedCity,
     utilityWorks,
     showUtilityWorksLayer,
     onSelectStreet,
