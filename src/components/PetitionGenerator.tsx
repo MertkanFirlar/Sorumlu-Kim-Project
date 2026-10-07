@@ -14,6 +14,7 @@ import { ComplaintCategory, PetitionFormData, StreetSegment } from '../types';
 import { AUTHORITIES_META, CATEGORY_DETAILS } from '../data/mockData';
 import { generatePetitionText, downloadPetitionPDF } from '../utils/petitionTemplate';
 import confetti from 'canvas-confetti';
+import { haptic } from '../utils/haptics';
 
 interface PetitionGeneratorProps {
   selectedStreets: StreetSegment[];
@@ -121,12 +122,14 @@ export const PetitionGenerator: React.FC<PetitionGeneratorProps> = ({
     navigator.clipboard.writeText(petitionText);
     setCopied(true);
     confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+    haptic('success');
     setTimeout(() => setCopied(false), 3000);
   };
 
   const handleDownloadPDF = () => {
     downloadPetitionPDF(formData);
     confetti({ particleCount: 70, spread: 70, origin: { y: 0.8 } });
+    haptic('success');
   };
 
   const handlePrint = () => window.print();

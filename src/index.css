@@ -214,6 +214,23 @@
   border-color: #2A2F3A !important;
 }
 
+/* ===== Erişilebilirlik: "hareketi azalt" tercihine saygı =====
+   Kullanıcı sisteminde azaltılmış hareket seçtiyse animasyon/geçiş/press
+   efektlerini neredeyse kapat. (Haptik de haptics.ts içinde devre dışı kalır.) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  button:active {
+    transform: none !important;
+  }
+}
+
 /* Print styling for formal Turkish petitions */
 @media print {
   body * {

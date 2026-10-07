@@ -14,6 +14,7 @@ import {
 import { AuthorityCorrectionProposal, AuthorityType, StreetSegment } from '../types';
 import { AUTHORITIES_META } from '../data/mockData';
 import confetti from 'canvas-confetti';
+import { haptic } from '../utils/haptics';
 
 interface CorrectionModalProps {
   street: StreetSegment;
@@ -63,6 +64,7 @@ export const CorrectionModal: React.FC<CorrectionModalProps> = ({
     setReason('');
     setDocUrl('');
     confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
+    haptic('success');
   };
 
   return (

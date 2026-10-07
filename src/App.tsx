@@ -33,6 +33,7 @@ import { Onboarding } from './components/Onboarding';
 import { PrivacyModal } from './components/PrivacyModal';
 import { HowItWorks } from './components/HowItWorks';
 import { fetchRoadAtLocation, fetchRoadByOsmWay, GeoPlace } from './services/roadService';
+import { haptic } from './utils/haptics';
 import { 
   Building2, 
   Layers, 
@@ -329,6 +330,7 @@ export default function App() {
         activeAuthorityFilter={activeAuthorityFilter}
         onSelectAuthorityFilter={setActiveAuthorityFilter}
         onSelectStreet={(street) => {
+          haptic('light');
           setSelectedStreet(street);
           setCurrentTab('harita');
         }}
@@ -353,7 +355,7 @@ export default function App() {
               <InteractiveMap
                 streets={filteredStreets}
                 selectedStreet={selectedStreet}
-                onSelectStreet={setSelectedStreet}
+                onSelectStreet={(street) => { haptic('light'); setSelectedStreet(street); }}
                 multiSelectedStreets={multiSelectedStreets}
                 onToggleMultiSelectStreet={handleToggleMultiSelect}
                 isMultiSelectMode={isMultiSelectMode}

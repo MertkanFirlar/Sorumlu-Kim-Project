@@ -25,6 +25,7 @@ import {
 import { AuthorityType, StreetSegment, ViewTab } from '../types';
 import { AUTHORITIES_META } from '../data/mockData';
 import { TURKEY_PROVINCES, geocodeSearch, GeoPlace } from '../services/roadService';
+import { haptic } from '../utils/haptics';
 
 interface NavbarProps {
   currentTab: ViewTab;
@@ -69,6 +70,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+
+  // Sekme değişiminde hafif dokunsal geri bildirim (mobilde hissedilir)
+  const selectTab = (tab: ViewTab) => {
+    haptic('light');
+    onSelectTab(tab);
+  };
 
   // Custom city dropdown state
   const [isCityOpen, setIsCityOpen] = useState(false);
@@ -134,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="w-full px-4 sm:px-6 py-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         {/* Brand and Tag */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => onSelectTab('harita')}>
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => selectTab('harita')}>
             <div className="w-9 h-9 bg-[#121212] rounded-xl flex items-center justify-center font-bold text-white shadow-xs">
               <Building2 className="w-5 h-5 text-white" />
             </div>
@@ -221,7 +228,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         key={street.id}
                         onMouseDown={() => {
                           onSelectStreet(street);
-                          onSelectTab('harita');
+                          selectTab('harita');
                           setSearchQuery('');
                         }}
                         className="px-3 py-2 hover:bg-neutral-100 cursor-pointer border-b border-neutral-200 last:border-0 flex items-center justify-between gap-2"
@@ -325,7 +332,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Navigation Tabs */}
         <nav className="flex flex-wrap items-center gap-1.5">
           <button
-            onClick={() => onSelectTab('harita')}
+            onClick={() => selectTab('harita')}
             className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold whitespace-nowrap transition ${
               currentTab === 'harita'
                 ? 'bg-[#121212] text-white shadow-xs'
@@ -337,7 +344,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={() => onSelectTab('kamu_calismalari')}
+            onClick={() => selectTab('kamu_calismalari')}
             className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold whitespace-nowrap transition ${
               currentTab === 'kamu_calismalari'
                 ? 'bg-[#121212] text-white shadow-xs'
@@ -354,7 +361,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={() => onSelectTab('sikayetler')}
+            onClick={() => selectTab('sikayetler')}
             className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold whitespace-nowrap transition ${
               currentTab === 'sikayetler'
                 ? 'bg-[#121212] text-white shadow-xs'
@@ -366,7 +373,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={() => onSelectTab('isi_haritasi')}
+            onClick={() => selectTab('isi_haritasi')}
             className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold whitespace-nowrap transition ${
               currentTab === 'isi_haritasi'
                 ? 'bg-[#121212] text-white shadow-xs'
@@ -378,7 +385,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={() => onSelectTab('dilekce')}
+            onClick={() => selectTab('dilekce')}
             className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold whitespace-nowrap transition ${
               currentTab === 'dilekce'
                 ? 'bg-[#121212] text-white shadow-xs'
@@ -390,7 +397,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={() => onSelectTab('istatistikler')}
+            onClick={() => selectTab('istatistikler')}
             className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold whitespace-nowrap transition ${
               currentTab === 'istatistikler'
                 ? 'bg-[#121212] text-white shadow-xs'

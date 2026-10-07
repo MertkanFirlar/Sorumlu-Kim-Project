@@ -4,6 +4,15 @@ Sorumlu Kim? projesinde **gün gün** ne yaptığımızın kaydı. En yeni en ü
 
 ---
 
+## 07.10.2026
+
+- 📳 **Dokunsal geri bildirim (haptik) eklendi**: telefonda sekme değiştirince, haritada yol seçince hafif titreşim; dilekçe indir/kopyala, şikayet ekleme ve kurum düzeltmesinde "başarı" titreşimi (konfeti ile birlikte). Android Chrome destekler, iOS/masaüstü sessizce yok sayar
+- ♿ **Erişilebilirlik**: sistemde "hareketi azalt" açık olan kullanıcılarda tüm animasyon/geçiş/press efektleri ve haptik otomatik kapanıyor
+
+## 30.09.2026
+
+- 🗺️ **Uzak (ülke geneli) zoom görünümü temizlendi**: yol çizgileri artık zoom'a göre inceliyor (uzakta şişik turuncu lekeler yok); çalışma etiketleri (ELEKTRİK/SU-KANAL) ve ⚠️ inşaat işaretleri yalnızca yakınlaşınca (zoom ≥ 10) görünüyor
+
 ## 28.09.2026
 
 - ❓ **"Nasıl Çalışır?" rehberi eklendi**: navbar'daki buton + karşılama ekranındaki linkten açılıyor; 3 adım (Yolu bul → Kim sorumlu öğren → Dilekçe oluştur) + örnek senaryo + "tahmini bilgi" dürüstlük notu

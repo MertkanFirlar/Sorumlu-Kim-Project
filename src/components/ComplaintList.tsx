@@ -20,6 +20,7 @@ import {
 import { AuthorityType, Complaint, ComplaintCategory, ComplaintStatus, StreetSegment } from '../types';
 import { AUTHORITIES_META, CATEGORY_DETAILS } from '../data/mockData';
 import confetti from 'canvas-confetti';
+import { haptic } from '../utils/haptics';
 
 interface ComplaintListProps {
   complaints: Complaint[];
@@ -96,6 +97,7 @@ export const ComplaintList: React.FC<ComplaintListProps> = ({
     setFormTitle('');
     setFormDesc('');
     confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
+    haptic('success');
   };
 
   return (

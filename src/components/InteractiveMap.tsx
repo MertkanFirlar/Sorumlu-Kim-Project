@@ -257,6 +257,10 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       }
     });
 
+    // Keep road thickness in sync with zoom (thin when zoomed out)
+    map.on('zoomend', () => setCurrentZoom(map.getZoom()));
+    setCurrentZoom(map.getZoom());
+
     // Map click: smart road snapper and draggable query pin
     map.on('click', async (e: L.LeafletMouseEvent) => {
       const { lat, lng } = e.latlng;
@@ -534,6 +538,15 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         baseWeight = 5;
       }
 
+      // Scale line thickness with zoom so far-out views don't show fat smears
+      const zoomScale =
+        currentZoom >= 15 ? 1 :
+        currentZoom >= 13 ? 0.85 :
+        currentZoom >= 11 ? 0.6 :
+        currentZoom >= 9 ? 0.4 :
+        currentZoom >= 7 ? 0.28 : 0.18;
+      baseWeight = Math.max(1.5, baseWeight * zoomScale);
+
       const activeWeight = isSelected ? baseWeight + 4 : isMultiSelected ? baseWeight + 3 : baseWeight;
       const lineColor = isMultiSelected ? '#f59e0b' : isSelected ? '#111827' : authorityMeta.color;
 
@@ -638,7 +651,8 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       polylinesGroupRef.current?.addLayer(polyline);
 
       // Generic Construction Warning Marker if no detailed utility work attached
-      if (street.status === 'construction' || street.status === 'maintenance') {
+      // (hidden at far-out zoom to keep the country overview clean)
+      if ((street.status === 'construction' || street.status === 'maintenance') && currentZoom >= 10) {
         const hasDetailedUtilityWork = utilityWorks.some((w) => w.streetId === street.id);
         if (!hasDetailedUtilityWork || !showUtilityWorksLayer) {
           const workIcon = L.divIcon({
@@ -676,6 +690,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
     showUtilityWorksLayer,
     onSelectStreet,
     onToggleMultiSelectStreet,
+    currentZoom,
   ]);
 
   // RENDER REAL-TIME UTILITY WORKS LAYER
@@ -684,6 +699,8 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
     utilityWorksGroupRef.current.clearLayers();
 
     if (!showUtilityWorksLayer) return;
+    // Hide work labels at far-out views to avoid clutter over the whole country
+    if (currentZoom < 10) return;
 
     const filteredWorks = utilityWorks.filter((w) => {
       if (selectedUtilityCategory !== 'ALL' && w.workCategory !== selectedUtilityCategory) {
@@ -804,7 +821,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
       utilityWorksGroupRef.current?.addLayer(marker);
     });
-  }, [utilityWorks, showUtilityWorksLayer, selectedUtilityCategory, streets, onSelectStreet, onSelectUtilityWork]);
+  }, [utilityWorks, showUtilityWorksLayer, selectedUtilityCategory, streets, onSelectStreet, onSelectUtilityWork, currentZoom]);
 
   const handleZoomIn = () => mapInstanceRef.current?.zoomIn();
   const handleZoomOut = () => mapInstanceRef.current?.zoomOut();
