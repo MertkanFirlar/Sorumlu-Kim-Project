@@ -4,6 +4,11 @@ Sorumlu Kim? projesinde **gün gün** ne yaptığımızın kaydı. En yeni en ü
 
 ---
 
+## 08.10.2026
+
+- 🛰️ **"Map data yok" hatası düzeltildi**: çok yakınlaşınca harita zemini (ArcGIS) kayboluyordu; artık en yakın kare büyütülerek gösteriliyor, boş gri tile gelmiyor
+- 📍 **Konum tam oturuyor**: GPS / arama ile bir yere uçarken ilk tıklamada hedefi biraz kaçırıp ikinci tıkta düzeliyordu; artık ilk seferde tam konuma gidiyor (uçmadan önce harita boyutu tazeleniyor)
+
 ## 07.10.2026
 
 - 🧹 **Harita ilk açılışta tertemiz**: sorumluluk çizgileri artık açılışta görünmüyor; kullanıcı bir **kuruma / şehre / yola** dokununca (ya da çalışma / ısı haritası modunu açınca) ilgili çizgiler beliriyor. Boş haritada yönlendiren ince bir ipucu balonu eklendi

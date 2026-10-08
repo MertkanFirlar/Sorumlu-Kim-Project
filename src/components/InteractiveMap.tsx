@@ -230,6 +230,9 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
 
     const tileLayer = L.tileLayer(tileUrls[mapStyle], {
       maxZoom: 19,
+      // ArcGIS Gray tabanı z16'da biter; üstüne çıkınca "map data yok" yerine
+      // mevcut en yakın tile büyütülerek gösterilsin (OSM ise 19'a kadar var).
+      maxNativeZoom: mapStyle === 'osm' ? 19 : 16,
       subdomains: 'abcd',
     }).addTo(map);
 
@@ -350,6 +353,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   // Update tile style
   useEffect(() => {
     if (!mapInstanceRef.current || !tileLayerRef.current) return;
+    tileLayerRef.current.options.maxNativeZoom = mapStyle === 'osm' ? 19 : 16;
     tileLayerRef.current.setUrl(tileUrls[mapStyle]);
   }, [mapStyle]);
 
@@ -389,7 +393,10 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       } else {
         userGpsMarkerRef.current.setLatLng(userGpsPos);
       }
-      map.flyTo(userGpsPos, 15, { duration: 1.2 });
+      // Boyut oturmadan uçarsa ilk seferde hedefi kaçırıyor (ikinci tıkta düzeliyordu);
+      // önce boyutu tazele, sonra tam konuma uç.
+      map.invalidateSize({ animate: false });
+      map.flyTo(userGpsPos, 16, { duration: 1.2 });
     }
   }, [userGpsPos]);
 
@@ -461,6 +468,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
   // Fly to an externally-requested location (search / onboarding / GPS)
   useEffect(() => {
     if (focusLocation && mapInstanceRef.current) {
+      mapInstanceRef.current.invalidateSize({ animate: false });
       mapInstanceRef.current.flyTo(focusLocation, 16, { duration: 1.2 });
     }
   }, [focusLocation]);
